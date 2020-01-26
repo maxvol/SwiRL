@@ -1,3 +1,3 @@
 struct SwiRL {
-    var text = "Hello, World!"
+    var text = "SwiRL"
 }
