@@ -24,4 +24,24 @@ protocol Logic {
      */
     func greedyAction() -> Action
     
+
+    
+}
+
+class BaseAlgorithm: Algorithm {
+    func backup(reward: Value, state: State) {
+        
+    }
+    
+    
+    func estimateError(oldEstimate: Value, target: Value) -> Value {
+        return target - oldEstimate
+    }
+    
+    /**
+    generic update rule
+     */
+    func newEstimate(oldEstimate: Value, target: Value, stepSize: Double) -> Value {
+        return oldEstimate + stepSize * estimateError(oldEstimate: oldEstimate, target: target)
+    }
 }
