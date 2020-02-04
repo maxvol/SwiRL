@@ -45,8 +45,5 @@ class BaseAlgorithm: Algorithm {
         return oldEstimate + stepSize * estimateError(oldEstimate: oldEstimate, target: target)
     }
     
-    func argmax<Key, Value>(_ dictionary: Dictionary<Key, Value>) -> Key where Key : Hashable, Value: Comparable {
-        return dictionary.max { lhs, rhs in lhs.value < rhs.value } as! Key // max(by:)
-    }
     
 }

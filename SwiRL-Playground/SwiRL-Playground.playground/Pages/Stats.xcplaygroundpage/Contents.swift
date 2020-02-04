@@ -1,9 +1,10 @@
 //: [Previous](@previous)
 
-func odds(probability p: Double) -> Double { p / (1.0 - p) }
-func probability(odds o: Double) -> Double { o / (1.0 + o) }
+import Foundation
+import SwiRL
 
-func bayes(likelihood: () -> Double, prior: () -> Double, evidence: () -> Double) -> Double { (likelihood() * prior()) / evidence() }
+let d = [ 1: 4, 2: 7, 3: 7, 4: 2 ]
+argmax(d)
 
 odds(probability: 0.5)
 probability(odds: 1.0)
@@ -21,5 +22,35 @@ func logit(probability p: Double) -> Double { Double.log(odds(probability: p)) }
 logit(probability: 0.001)
 logit(probability: 0.999)
 */
+
+
+𝚪(1)
+Β(1,2)
+
+let beta2_2 = Beta(2, 2)
+beta2_2.mean
+let beta1_1 = Beta(1, 1)
+let beta01_01 = Beta(0.1, 0.1)
+let beta2_3 = Beta(2, 3)
+let beta8_4 = Beta(8, 4)
+
+for x in stride(from: 0.0, through: 1.0, by: 0.05) {
+    beta2_2.PDF(x)
+    beta1_1.PDF(x)
+    beta01_01.PDF(x)
+    beta2_3.PDF(x)
+    beta8_4.PDF(x)
+}
+
+let beta_ = Beta(mean: 0.8, variance: 0.01)
+beta_.a
+beta_.b
+beta_.mean
+beta_.variance
+
+for x in stride(from: -10, through: 10.0, by: 0.05) {
+    sigmoid(x)
+    sigmoidDerivative(x)
+}
 
 //: [Next](@next)

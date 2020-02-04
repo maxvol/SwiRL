@@ -2,7 +2,6 @@
 
 import SwiRL
 
-
 let env = RLEnvironment()
 let oneStepTD = OneStepTD()
 let sarsa = SARSA()
