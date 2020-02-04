@@ -12,8 +12,8 @@ let arms: [Distribution] = [
     Gamma(3, 1)
 ]
 let state = RLState(0, isTerminal: false)
-let steps = 1000
-var frames: [[Action: Int]] = []
+let steps = 5000
+var frames: [[Action: Int]] = Array(repeating: [:], count: steps)
 for i in 0..<steps {
     let x = Double.random(in: 0.0...100.0)
     if let k = bandit.last.action {
@@ -22,8 +22,9 @@ for i in 0..<steps {
     } else {
         bandit.step(reward: 0.0, state: state)
     }
-    frames.append(bandit.N)
+    frames[i] = bandit.N
 }
+bandit.Q
 let optimal = argmax(bandit.Q)!
 let percent = 100.0 * Double(bandit.N[optimal]!) / Double(steps)
 for frame in frames {
