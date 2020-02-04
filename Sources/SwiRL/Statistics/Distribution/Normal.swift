@@ -26,4 +26,8 @@ public struct Normal: Distribution {
         let parabola = pow(x - self.mean, 2.0) / doubleVariance
         return const * e(-parabola)
     }
+    
+    public func posterior(x: Double, conjugatePrior: Gamma) -> Distribution {
+        Gamma(0.5 + conjugatePrior.a, 0.5 * pow(x - self.mean, 2.0) + conjugatePrior.b)
+    }
 }

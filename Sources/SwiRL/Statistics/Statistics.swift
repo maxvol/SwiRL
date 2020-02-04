@@ -14,6 +14,9 @@ public func 𝚪(_ n: Double) -> Double {
   return tgamma(n) // Foundation
 }
 
+/** ɣ = 1/σ² */
+public func precision(variance: Double) -> Double { 1.0 / variance }
+
 /**
  Β(a,b) = 𝚪(a)𝚪(b)/𝚪(a+b)
 */
