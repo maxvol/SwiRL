@@ -28,7 +28,7 @@ public struct Beta: Distribution {
         assert({ a > 0.0 && b > 0.0 }(), "a,b > 0")
     }
     
-    /** 𝔼x = a/(a+b) */
+    /** 𝔼[x] = a/(a+b) */
     public var mean: Double { get { self.a / (self.a + self.b) } }
     
     /** Mode[x] = (a-1)/(a+b-2) */

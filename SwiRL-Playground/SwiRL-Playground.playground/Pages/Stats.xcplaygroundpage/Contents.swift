@@ -36,6 +36,8 @@ let beta1_1 = Beta(1, 1)
 let beta01_01 = Beta(0.1, 0.1)
 let beta2_3 = Beta(2, 3)
 let beta8_4 = Beta(8, 4)
+let gamma18_3 = Gamma(18, 3)
+let gamma1_1 = Gamma(1, 1)
 
 beta8_4.mean
 
@@ -45,6 +47,11 @@ for x in stride(from: 0.0, through: 1.0, by: 0.05) {
     beta01_01.PDF(x)
     beta2_3.PDF(x)
     beta8_4.PDF(x)
+}
+
+for x in stride(from: 0.01, through: 10.0, by: 0.05) {
+    gamma18_3.PDF(x)
+    gamma1_1.PDF(x)
 }
 
 let beta_ = Beta(mean: 0.8, variance: 0.01)

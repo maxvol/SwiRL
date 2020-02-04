@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Gmma: Distribution {
+public struct Gamma: Distribution {
     public let a: Double
     public let b: Double
     
@@ -26,14 +26,14 @@ public struct Gmma: Distribution {
 //        assert({ a > 0.0 && b > 0.0 }(), "a,b > 0")
 //    }
     
-    /** 𝔼x = a/(a+b) */
-    public var mean: Double { get { self.a / (self.a + self.b) } } // TODO: wrong
+    /** 𝔼[x] = a/b */
+    public var mean: Double { get { self.a / self.b } }
     
-    /** Mode[x] = (a-1)/(a+b-2) */
-    public var mode: Double { get { (self.a - 1.0) / (self.a + self.b - 2.0) } } // TODO: wrong
+    /** Mode[x] = (a-1)/b*/
+    public var mode: Double { get { (self.a - 1.0) / self.b } }
     
-    /** Var[x] = ab/((a+b)²(a+b-1)) */
-    public var variance: Double { get { self.a * self.b / (pow(self.a + self.b, 2.0) * (self.a + self.b - 1.0 )) } } // TODO: wrong
+    /** Var[x] = a/b^2 */
+    public var variance: Double { get { self.a / pow(self.b, 2.0) } }
     
     /**
      */
