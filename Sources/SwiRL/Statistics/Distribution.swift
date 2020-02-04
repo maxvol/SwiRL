@@ -9,8 +9,8 @@ import Foundation
 
 public protocol Distribution {
     func PDF(_ x: Double) -> Double
-    var mean: Double { get }
     var mode: Double { get }
+    var mean: Double { get }
     var variance: Double { get }
 }
 
