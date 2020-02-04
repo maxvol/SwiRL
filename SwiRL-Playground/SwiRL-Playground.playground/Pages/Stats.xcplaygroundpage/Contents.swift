@@ -3,6 +3,9 @@
 import Foundation
 import SwiRL
 
+let bernoulli = Bernoulli()
+bernoulli.likelihood(θ: 0.5, N1: 5, N0: 5)
+
 let d = [ 1: 4, 2: 7, 3: 7, 4: 2 ]
 argmax(d)
 
@@ -33,6 +36,8 @@ let beta1_1 = Beta(1, 1)
 let beta01_01 = Beta(0.1, 0.1)
 let beta2_3 = Beta(2, 3)
 let beta8_4 = Beta(8, 4)
+
+beta8_4.mean
 
 for x in stride(from: 0.0, through: 1.0, by: 0.05) {
     beta2_2.PDF(x)

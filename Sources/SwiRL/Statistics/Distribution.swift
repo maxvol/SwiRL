@@ -55,3 +55,13 @@ public struct Beta: Distribution {
     }
     
 }
+
+public struct Bernoulli {
+    
+    public init() { }
+    
+    /** p(X|θ) = θᴺ¹(1 - θ)ᴺ⁰ */
+    public func likelihood(θ: Double, N1: Double, N0: Double) -> Double { pow(θ, N1) * pow(1.0 - θ, N0) }
+
+    
+}
