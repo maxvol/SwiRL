@@ -32,7 +32,7 @@ public struct Gamma: Distribution {
     /** Mode[x] = (a-1)/b*/
     public var mode: Double { get { (self.a - 1.0) / self.b } }
     
-    /** Var[x] = a/b^2 */
+    /** Var[x] = a/b² */
     public var variance: Double { get { self.a / pow(self.b, 2.0) } }
     
     /**
