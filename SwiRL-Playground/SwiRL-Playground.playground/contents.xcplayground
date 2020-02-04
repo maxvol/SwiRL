@@ -4,5 +4,6 @@
         <page name='TD+SARSA'/>
         <page name='Q-Learning'/>
         <page name='Stats'/>
+        <page name='Bandit'/>
     </pages>
 </playground>

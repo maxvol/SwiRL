@@ -7,7 +7,7 @@
 
 // TODO: TD(λ), N-step TD
 
-protocol Logic {
+public protocol Logic {
     
     /**
     q*(a) =𝔼[Rt | At = a]
@@ -28,9 +28,9 @@ protocol Logic {
 
 }
 
-class BaseAlgorithm: Algorithm {
-        
-    func backup(reward: Value, state: State) {
+public class BaseAlgorithm: Algorithm {
+    
+    public func backup(reward: Value, state: State) {
         
     }
     

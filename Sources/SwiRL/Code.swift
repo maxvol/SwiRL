@@ -36,11 +36,8 @@ public class RLAgent: Agent {
 public class RLPolicy: Policy {
     // greedy, softmax, random
     func nextAction() -> Action {
-        return RLAction()
+        return Action()
     }
-}
-
-public class RLAction: Action {
 }
 
 public class RLState: State {
