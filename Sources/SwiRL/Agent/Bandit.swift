@@ -5,7 +5,11 @@
 //  Created by Maxim Volgin on 04/02/2020.
 //
 
-public class Bandit: BaseAlgorithm {
+public class Bandit: BaseAlgorithm {    
+    public struct Last {
+        public var action: Action? = nil
+    }
+    public private(set) var last = Last(action: nil)
     
     public let k: Int
     public let ε: Double
@@ -30,17 +34,19 @@ public class Bandit: BaseAlgorithm {
         }
     }
     
-    public func step(reward: Reward) {
-        guard let action = self.action() else { return }
+    public func step(reward: Reward, state: State) -> Action? {
+        self.backup(reward: reward, state: state)
+        self.last.action = self.action()
+        return self.last.action
+    }
+    
+    override public func backup(reward: Reward, state: State) {
+        guard let action = self.last.action else { return }
         self.N[action]? += 1
         let stepSize = 1.0 / Double(N[action] ?? 1)
         if let oldEstimate = self.Q[action] {
             self.Q[action]? = self.newEstimate(oldEstimate: oldEstimate, target: reward, stepSize: stepSize)
         }
-    }
-    
-    override public func backup(reward: Value, state: State) {
-        
     }
     
     

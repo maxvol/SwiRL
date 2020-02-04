@@ -43,7 +43,7 @@ public class RLPolicy: Policy {
 public class RLState: State {
     public var id: Int
     public var isTerminal: Bool
-    init(_ id: Int, isTerminal: Bool) {
+    public init(_ id: Int, isTerminal: Bool) {
         self.id = id
         self.isTerminal = isTerminal
     }

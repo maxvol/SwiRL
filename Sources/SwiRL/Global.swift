@@ -25,5 +25,5 @@ public protocol Policy {}
 public protocol Environment {}
 
 public protocol Algorithm {    
-    func backup(reward: Value, state: State)
+    func backup(reward: Reward, state: State)
 }

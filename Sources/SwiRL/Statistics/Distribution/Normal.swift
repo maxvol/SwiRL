@@ -13,7 +13,7 @@ public struct Normal: Distribution {
     
     public var mode: Double { get { 0.0 } } // TODO
 
-    public init(mean: Double, variance: Double) {
+    public init(_ mean: Double, _ variance: Double) {
         self.mean = mean
         self.variance = variance
 //        assert({ a > 0.0 && b > 0.0 }(), "a,b > 0")
