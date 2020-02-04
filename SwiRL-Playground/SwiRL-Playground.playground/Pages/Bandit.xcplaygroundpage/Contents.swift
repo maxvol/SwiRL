@@ -12,8 +12,9 @@ let arms: [Distribution] = [
     Gamma(3, 1)
 ]
 let state = RLState(0, isTerminal: false)
-
-for i in 0..<10000 {
+let steps = 1000
+var frames: [[Action: Int]] = []
+for i in 0..<steps {
     let x = Double.random(in: 0.0...100.0)
     if let k = bandit.last.action {
         let reward = arms[k - 1].PDF(x)
@@ -21,10 +22,13 @@ for i in 0..<10000 {
     } else {
         bandit.step(reward: 0.0, state: state)
     }
-    bandit.N
-    bandit.Q
+    frames.append(bandit.N)
 }
-bandit.N
-bandit.Q
+let optimal = argmax(bandit.Q)!
+let percent = 100.0 * Double(bandit.N[optimal]!) / Double(steps)
+for frame in frames {
+    let percent = 100.0 * Double(frame[optimal]!) / Double(steps)
+    percent
+}
 
 //: [Next](@next)
