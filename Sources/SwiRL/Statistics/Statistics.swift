@@ -24,11 +24,6 @@ public func Β(_ a: Double, _ b: Double) -> Double {
   return 𝚪(a)*𝚪(b)/𝚪(a+b)
 }
 
-public func odds(probability p: Double) -> Double { p / (1.0 - p) }
-public func probability(odds o: Double) -> Double { o / (1.0 + o) }
-
-public func bayes(likelihood: () -> Double, prior: () -> Double, evidence: () -> Double) -> Double { (likelihood() * prior()) / evidence() }
-
 //The lgamma* functions are the logarithms of the gamma function. For the gamma function, use tgamma, tgammaf, or tgammal
 //double tgamma (double x)  
 //float tgammaf (float x)
@@ -52,3 +47,13 @@ public func σ(_ x: Double) -> Double { 1.0 / (1.0 + exp(-x)) }
 public func sigmoidDerivative(_ x: Double) -> Double { sigmoid(x) * (1.0 - sigmoid(x)) }
 public func σ_(_ x: Double) -> Double { sigmoid(x) * (1.0 - sigmoid(x)) }
 
+prefix operator ∑
+public prefix func ∑ <S: Sequence>(values: S) -> S.Element where S.Element : Numeric & ExpressibleByIntegerLiteral {
+    return values.reduce(0, +)
+}
+
+/** Cartesian product */
+prefix operator ∏
+public prefix func ∏ <S: Sequence>(values: S) -> S.Element where S.Element : Numeric & ExpressibleByIntegerLiteral {
+    return values.reduce(1, *)
+}

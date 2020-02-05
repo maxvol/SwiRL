@@ -5,5 +5,6 @@
         <page name='Q-Learning'/>
         <page name='Statistics'/>
         <page name='Bandit'/>
+        <page name='Probability'/>
     </pages>
 </playground>

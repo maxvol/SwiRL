@@ -16,7 +16,7 @@ public struct Beta: Distribution {
     public init(_ a: Double, _ b: Double) {
         self.a = a
         self.b = b
-        assert({ a > 0.0 && b > 0.0 }(), "a,b > 0")
+        assert(a > 0.0 && b > 0.0, "a,b > 0")
     }
     
     /** not necesserily correct */
@@ -25,7 +25,7 @@ public struct Beta: Distribution {
         let mul = (1.0 - mean) * mean
         self.a = mean * (1.0 + mul / variance)
         self.b = self.a * div
-        assert({ a > 0.0 && b > 0.0 }(), "a,b > 0")
+        assert(a > 0.0 && b > 0.0, "a,b > 0")
     }
     
     /** 𝔼[x] = a/(a+b) */
@@ -43,7 +43,7 @@ public struct Beta: Distribution {
      a,b > 0
      */
     public func PDF(_ x: Double) -> Double {
-        assert({ x >= 0.0 && x <= 1.0 }(), "x ∊ [0,1]")
+        assert(x >= 0.0 && x <= 1.0, "x ∊ [0,1]")
         return pow(x, a - 1) * pow(1 - x, b - 1) / Β(self.a, self.b)
     }
     

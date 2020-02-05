@@ -14,7 +14,7 @@ public struct Gamma: Distribution {
     public init(_ a: Double, _ b: Double) {
         self.a = a
         self.b = b
-        assert({ a > 0.0 && b > 0.0 }(), "a,b > 0")
+        assert(a > 0.0 && b > 0.0, "a,b > 0")
     }
     
     /** not necesserily correct */
@@ -38,8 +38,8 @@ public struct Gamma: Distribution {
     /**
      */
     public func PDF(_ x: Double) -> Double {
-        assert({ x > 0.0 }(), "x > 0")
-        return e(-self.b * x) * pow(x, self.a - 1.0) * pow(self.b, self.a) / 𝚪(self.a)
+        assert(x > 0.0, "x > 0")
+        return exp(-self.b * x) * pow(x, self.a - 1.0) * pow(self.b, self.a) / 𝚪(self.a)
     }
     
 }
