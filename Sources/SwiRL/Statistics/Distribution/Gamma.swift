@@ -17,15 +17,6 @@ public struct Gamma: Distribution {
         assert(a > 0.0 && b > 0.0, "a,b > 0")
     }
     
-    /** not necesserily correct */
-//    public init(mean: Double, variance: Double) {
-//        let div = (1.0 - mean) / mean
-//        let mul = (1.0 - mean) * mean
-//        self.a = mean * (1.0 + mul / variance)
-//        self.b = self.a * div
-//        assert({ a > 0.0 && b > 0.0 }(), "a,b > 0")
-//    }
-    
     /** 𝔼[x] = a/b */
     public var mean: Double { get { self.a / self.b } }
     
