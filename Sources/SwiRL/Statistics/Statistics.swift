@@ -41,11 +41,13 @@ public func argmax<Key, Value>(_ dictionary: Dictionary<Key, Value>) -> Key? whe
     return random.key
 }
 
-public func exponent(_ x: Double) -> Double { pow(Darwin.M_E, x) }
-public func e(_ x: Double) -> Double { pow(Darwin.M_E, x) }
+//public func exponent(_ x: Double) -> Double { pow(Darwin.M_E, x) }
+//public func e(_ x: Double) -> Double { pow(Darwin.M_E, x) }
 
-public func sigmoid(_ x: Double) -> Double { 1.0 / (1.0 + exponent(-x)) }
-public func σ(_ x: Double) -> Double { 1.0 / (1.0 + exponent(-x)) }
+public func ln(_ x: Double) -> Double { log(x) }
+
+public func sigmoid(_ x: Double) -> Double { 1.0 / (1.0 + exp(-x)) }
+public func σ(_ x: Double) -> Double { 1.0 / (1.0 + exp(-x)) }
 
 public func sigmoidDerivative(_ x: Double) -> Double { sigmoid(x) * (1.0 - sigmoid(x)) }
 public func σ_(_ x: Double) -> Double { sigmoid(x) * (1.0 - sigmoid(x)) }

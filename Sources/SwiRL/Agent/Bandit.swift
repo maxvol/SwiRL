@@ -5,6 +5,8 @@
 //  Created by Maxim Volgin on 04/02/2020.
 //
 
+import Foundation
+
 public class Bandit: BaseAlgorithm {    
     public struct Last {
         public var action: Action? = nil
@@ -49,7 +51,10 @@ public class Bandit: BaseAlgorithm {
         }
     }
     
-    
+    func UCB(Qta: Double, Nta: Double, t: Double, c: Double) -> Double {
+        assert({ c > 0.0 }(), "c > 0")
+        return Qta + c * sqrt(ln(t) / Nta)
+    }
     
 }
 
