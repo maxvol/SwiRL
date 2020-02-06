@@ -54,6 +54,8 @@ public struct Probability {
      summation rule
      */
     
+    // MARK: Bayes: P(Θ|X) = P(X|Θ) * P(Θ) / P(X)
+    
     /**
      P(Θ|X) = P(X|Θ) * P(Θ) / P(X)
      Θ - parameter
@@ -81,5 +83,10 @@ public struct Probability {
     public static func bayes(joint xAndΘ: @autoclosure () -> Double, evidence pX: @autoclosure () -> Double) -> Double {
         xAndΘ() / pX()
     }
+    
+    // MARK: On-line Bayes: Pᵢ(Θ) = P(Θ|Xᵢ) = P(Xᵢ|Θ) * Pᵢ₋₁(Θ) / P(Xᵢ)
+    
+    
+    // MLE: Â = argmaxₐP(X|A)
     
 }
