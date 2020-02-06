@@ -21,6 +21,8 @@ public func odds(probability p: Double) -> Double { p / (1.0 - p) }
 public func probability(odds o: Double) -> Double { o / (1.0 + o) }
 
 public struct Probability {
+    
+    // MARK: Joint: P(X,Y) = P(X) * P(Y)
 
     /**
      P(X,Y) = P(X) * P(Y)
@@ -29,6 +31,8 @@ public struct Probability {
      */
     public static func joint(marginals: Double...) -> Double { ∏marginals }
 
+    // MARK: Conditional: P(X|Y) = P(X,Y) / P(Y)
+    
     /**
      P(X|Y) = P(X,Y) / P(Y)
      conditional = joint / marginal
@@ -37,11 +41,13 @@ public struct Probability {
     public static func conditional(joint xAndY: @autoclosure () -> Double, marginal pY: @autoclosure () -> Double) -> Double {
         xAndY() / pY()
     }
+    
+    // MARK: Chain rule: P(X,Y) = P(X|Y) * P(Y) or P(X,Y,Z) = P(X|Y,Z) * P(Y|Z) * P(Z) or P(X₁, ... Xn) = ∏ P(Xᵢ|X₁, ... Xᵢ₋₁)
 
     /**
      P(X,Y) = P(X|Y) * P(Y)
      P(X,Y,Z) = P(X|Y,Z) * P(Y|Z) * P(Z)
-     P(X1, ... Xn) = ∏ P(Xi|X1, ... Xi-1)
+     P(X₁, ... Xn) = ∏ P(Xi|X₁, ... Xᵢ₋₁)
      joint = conditional * marginal
      */
     public static func chain(conditional xGivenY: @autoclosure () -> Double, marginal pY: @autoclosure () -> Double) -> Double {
@@ -54,6 +60,7 @@ public struct Probability {
      summation rule
      */
     
+    // MARK: On-line Bayes: Pᵢ(Θ) = P(Θ|Xᵢ) = P(Xᵢ|Θ) * Pᵢ₋₁(Θ) / P(Xᵢ)
     // MARK: Bayes: P(Θ|X) = P(X|Θ) * P(Θ) / P(X)
     
     /**
@@ -83,8 +90,6 @@ public struct Probability {
     public static func bayes(joint xAndΘ: @autoclosure () -> Double, evidence pX: @autoclosure () -> Double) -> Double {
         xAndΘ() / pX()
     }
-    
-    // MARK: On-line Bayes: Pᵢ(Θ) = P(Θ|Xᵢ) = P(Xᵢ|Θ) * Pᵢ₋₁(Θ) / P(Xᵢ)
     
     
     // MLE: Â = argmaxₐP(X|A)

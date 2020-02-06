@@ -3,7 +3,7 @@
 import Foundation
 import SwiRL
 
-let bernoulli = Bernoulli()
+let bernoulli = Bernoulli(0.1)
 bernoulli.likelihood(θ: 0.5, N1: 5, N0: 5)
 
 let d = [ 1: 4, 2: 7, 3: 7, 4: 2 ]
@@ -38,8 +38,7 @@ let beta2_3 = Beta(2, 3)
 let beta8_4 = Beta(8, 4)
 let gamma18_3 = Gamma(18, 3)
 let gamma1_1 = Gamma(1, 1)
-let normal3_3 = Normal(3, 3)
-let normal2_1 = Normal(2, 1)
+
 
 beta8_4.mean
 
@@ -56,9 +55,16 @@ for x in stride(from: 0.01, through: 10.0, by: 0.05) {
     gamma1_1.PDF(x)
 }
 
+let normal3_3 = Normal(3, 3)
+let normal2_1 = Normal(2, 1)
+let normal7_4 = Normal(7, 4)
+let gmm = GMM((0.5, normal7_4), (0.5, normal2_1))
+
 for x in stride(from: 0.0, through: 10.0, by: 0.05) {
     normal3_3.PDF(x)
     normal2_1.PDF(x)
+    normal7_4.PDF(x)
+    gmm.PDF(x)
 }
 
 let beta_ = Beta(mean: 0.8, variance: 0.01)
