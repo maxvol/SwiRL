@@ -10,7 +10,10 @@ import Foundation
 /**
   Gaussian Mixture Model
  */
-public struct GMM {    
+public struct GMM {
+    
+    // typealias Element = (π: Double, N: Normal)
+    
     public let πN: [(Double, Normal)]
     
     public init(_ πN: (Double, Normal)...) {
@@ -18,6 +21,6 @@ public struct GMM {
     }
     
     public func PDF(_ x: Double) -> Double {
-        ∑self.πN.map { $0.0 * $0.1.PDF(x) }
+        ∑self.πN.map { (π, N) in π * N.PDF(x) }
     }
 }
