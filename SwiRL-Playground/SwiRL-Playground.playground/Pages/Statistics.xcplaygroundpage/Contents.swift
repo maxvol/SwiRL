@@ -3,6 +3,8 @@
 import Foundation
 import SwiRL
 
+let sm = softmax(h: [1,4,6,8], i: 2)
+
 let bernoulli = Bernoulli(0.1)
 bernoulli.likelihood(θ: 0.5, N1: 5, N0: 5)
 
