@@ -95,3 +95,16 @@ public struct Probability {
     // MLE: Â = argmaxₐP(X|A)
     
 }
+
+// import Numerics
+// import Complex
+// import Real
+// let z = Complex<Double>.i
+
+// func logit(probability p: Double) -> Double { Double.log(odds(probability: p)) }
+
+// odds(probability: 0.5)
+// probability(odds: 1.0)
+// probability(odds: 0.5)
+// logit(probability: 0.001)
+// logit(probability: 0.999)
