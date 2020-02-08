@@ -9,13 +9,10 @@ import Foundation
 
 public struct Dirichlet { // : Distribution {
     public let α: [Double]
-    public let θ: [Double]
 
     public init(_ α: [Double], _ θ: Double...) {
-        assert(θ.filter { $0 < 0.0 }.count == 0, "θ >= 0")
-        assert(θ.reduce(0,+) == 1.0, "∑θ = 1")
+        assert(α.filter { $0 <= 0.0 }.count == 0, "α > 0")
         self.α = α
-        self.θ = θ
     }
 
 //    /** 𝔼[x] = p */
@@ -29,9 +26,17 @@ public struct Dirichlet { // : Distribution {
 
     /**
      */
-//    public func PDF(_ x: Double) -> Double {
-////        assert(x >= 0.0 && x <= 1.0, "x ∊ [0,1]")
-//        return ∏ zip(self.θ, self.α).map { pair in let (θ, α) = pair; pow(θ, α) } / B(self.α)
-//    }
+    public func PDF(_ θ: Double...) -> Double {
+        assert(θ.count == self.α.count, "x count = \(self.α.count)")
+        assert(θ.filter { $0 < 0.0 }.count == 0, "θ >= 0")
+        assert(θ.reduce(0,+) == 1.0, "∑θ = 1")
+        let α₀ = ∑self.α
+        let α₊ = [α₀] + self.α
+        let product: Array<Double> = zip(θ, α₊).map { pair in
+                let (x, α) = pair
+                return pow(x, α)
+            }
+        return ( ∏product ) / Β(self.α)
+    }
 
 }

@@ -24,6 +24,20 @@ public func Β(_ a: Double, _ b: Double) -> Double {
   return 𝚪(a)*𝚪(b)/𝚪(a+b)
 }
 
+/**
+ Β(xᵢ) = ∏𝚪(xᵢ)/∑𝚪(xᵢ)
+*/
+public func Β(_ x: Double...) -> Double {
+    return ( ∏x.map { 𝚪($0) } ) / 𝚪(∑x)
+}
+
+/**
+ Β(xᵢ) = ∏𝚪(xᵢ)/∑𝚪(xᵢ)
+*/
+public func Β(_ x: [Double]) -> Double {
+    return ( ∏x.map { 𝚪($0) } ) / 𝚪(∑x)
+}
+
 //The lgamma* functions are the logarithms of the gamma function. For the gamma function, use tgamma, tgammaf, or tgammal
 //double tgamma (double x)  
 //float tgammaf (float x)
