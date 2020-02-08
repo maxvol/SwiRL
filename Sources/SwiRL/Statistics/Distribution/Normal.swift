@@ -31,3 +31,5 @@ public struct Normal: Distribution {
         Gamma(0.5 + conjugatePrior.a, 0.5 * pow(x - self.mean, 2.0) + conjugatePrior.b)
     }
 }
+
+// any multivariate gaussian X ∼ N(μ,Σ) can be represented as μ+(Σϵ)^1/2, where ϵ ∼ N(0,I)
