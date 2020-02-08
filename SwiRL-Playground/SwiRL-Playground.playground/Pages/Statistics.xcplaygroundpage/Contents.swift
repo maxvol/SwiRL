@@ -28,6 +28,7 @@ logit(probability: 0.001)
 logit(probability: 0.999)
 */
 
+//KL(q∥p)=∫q(z)logq(z)p(z)dz
 
 𝚪(1)
 Β(1,2)
