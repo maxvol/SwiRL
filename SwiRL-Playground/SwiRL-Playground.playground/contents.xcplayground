@@ -7,5 +7,6 @@
         <page name='Bandit'/>
         <page name='Probability'/>
         <page name='Sampling'/>
+        <page name='Distance'/>
     </pages>
 </playground>
