@@ -28,17 +28,43 @@ public struct ARNet {
      */
     public var R: Double { get { ∑self.θ.map { θ in 2 * σ(ARNet.c₁ * pow(abs(θ), 1.0 / ARNet.c₂)) - 1.0} / Double(ARNet.p) } }
     
+    public func ŷ(_ x: [Double]) -> [Double]  {
+        assert(x.count == self.θ.count, "length must be same as θ's")
+        return zip(x, self.θ).map { (x, θ) in θ * x }
+    }
+    
     /**
      L(y,ŷ,θ) + λ(s) * R(θ)
      */
-    public func cost(_ y: [Double], _ ŷ: [Double]) -> Double {
-        assert(y.count == ŷ.count && ŷ.count == self.θ.count, "all lengths must be same as θ's")
-        return L(y, ŷ) + self.λ * self.R
+    public func J(_ x: [Double], _ y: [Double]) -> Double {
+        assert(x.count == y.count && y.count == self.θ.count, "all lengths must be same as θ's")
+        return L(y, zip(x, self.θ).map { (x, θ) in x * θ } ) + self.λ * self.R
     }
     
     public func predict(_ x: [Double]) -> Double {
         assert(x.count == self.θ.count, "length must be same as θ's")
-        return ∑zip(x, self.θ).map { (x, θ) in θ * x }
+        return ∑ŷ(x)
+    }
+    
+    func dx(_ x: Double) -> Double { x } // TEMP
+    
+    // updates theta by taking n gradient steps with learning rate α
+    public mutating func gd(_ x: [Double], _ y: [Double], _ α: Double, _ n: Int) -> [Double] {
+        assert(x.count == self.θ.count, "length must be same as θ's")
+        let m = y.count // number of training examples
+        var J_history: [Double] = Array.init(repeating: 0, count: n)
+        for i in 0..<n {
+            let θ = zip(zip(x, y), self.θ).map { (arg: ((Double, Double), Double)) -> Double in
+                let (arg0, θ) = arg
+                let (x, y) = arg0
+                return θ - α * dx(x) * (x * θ - y) / Double(m)
+            }
+            for p in 0..<θ.count {
+                self.θ[p] = θ[p]
+            }
+            J_history[i] = self.J(x, y)
+        }
+        return J_history
     }
     
     
