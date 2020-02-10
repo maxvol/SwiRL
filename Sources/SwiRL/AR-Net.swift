@@ -7,17 +7,31 @@
 
 import Foundation
 
+/**
+ rand coeff, ∑|w| <= 1, + rand normal noise sd=1
+ data must be normalized!
+ */
 public struct ARNet {
     
     public init() {}
     
     let L = MSE
     
+    /**
+     estimated or desired sparsity
+     s = p̂ / p
+     where p̂ - order of data, p - order of model
+     */
     static let s = 1.0
+    
+    /**
+    approx. SD_of_noise / 100
+     */
     static let c = 1.0
     static let c₁ = 3.0 // for normalized data and coeff within [0,1]
     static let c₂ = 3.0 // for normalized data and coeff within [0,1]
     
+    /** AR order, i.e. amoount of coefficients/weights and lags */
     public static let p = 12 // TEMP
     public var θ: [Double] = Array.init(repeating: Double.random(in: 0...1), count: ARNet.p)
     
@@ -29,7 +43,7 @@ public struct ARNet {
     public var R: Double { get { ∑self.θ.map { θ in 2 * σ(ARNet.c₁ * pow(abs(θ), 1.0 / ARNet.c₂)) - 1.0} / Double(ARNet.p) } }
     
     public func ŷ(_ x: [Double]) -> [Double]  {
-        assert(x.count == self.θ.count, "length must be same as θ's")
+//        assert(x.count == self.θ.count, "length must be same as θ's")
         return zip(x, self.θ).map { (x, θ) in θ * x }
     }
     
@@ -41,8 +55,11 @@ public struct ARNet {
         return L(y, zip(x, self.θ).map { (x, θ) in x * θ } ) + self.λ * self.R
     }
     
+    /**
+     x - lags from t-1 to t-p
+     */
     public func predict(_ x: [Double]) -> Double {
-        assert(x.count == self.θ.count, "length must be same as θ's")
+//        assert(x.count == self.θ.count, "length must be same as θ's")
         return ∑ŷ(x)
     }
     
