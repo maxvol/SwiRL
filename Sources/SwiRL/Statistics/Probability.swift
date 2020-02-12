@@ -20,6 +20,13 @@ public func PDF(_ x: Double) -> Double { 0.0 } // TODO
 public func odds(probability p: Double) -> Double { p / (1.0 - p) }
 public func probability(odds o: Double) -> Double { o / (1.0 + o) }
 
+public func softmax(_ value: Double, _ array: [Double]) -> Double {
+    guard let max = array.max() else {
+        return exp(value) / exp(array.reduce(0, +))
+    }    
+    return exp(value - max) / exp(array.map { $0 - max }.reduce(0, +))
+}
+
 public struct Probability {
     
     // MARK: Joint: P(X,Y) = P(X) * P(Y)
