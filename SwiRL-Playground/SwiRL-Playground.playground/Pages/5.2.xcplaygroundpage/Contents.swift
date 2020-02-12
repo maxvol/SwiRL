@@ -34,4 +34,13 @@ extension Function {
 let f = Function<Double, Double>( { x -> Double in pow(x, 2.0) } )
 f(2.0)
 
+
+
+// import Numerics
+// import Complex
+// import Real
+// let z = Complex<Double>.i
+
+
+
 //: [Next](@next)

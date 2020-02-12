@@ -20,6 +20,8 @@ public func PDF(_ x: Double) -> Double { 0.0 } // TODO
 public func odds(probability p: Double) -> Double { p / (1.0 - p) }
 public func probability(odds o: Double) -> Double { o / (1.0 + o) }
 
+public func logit(probability p: Double) -> Double { log(odds(probability: p)) }
+
 public func softmax(_ value: Double, _ array: [Double]) -> Double {
     guard let max = array.max() else {
         return exp(value) / exp(array.reduce(0, +))
@@ -103,15 +105,4 @@ public struct Probability {
     
 }
 
-// import Numerics
-// import Complex
-// import Real
-// let z = Complex<Double>.i
 
-// func logit(probability p: Double) -> Double { Double.log(odds(probability: p)) }
-
-// odds(probability: 0.5)
-// probability(odds: 1.0)
-// probability(odds: 0.5)
-// logit(probability: 0.001)
-// logit(probability: 0.999)

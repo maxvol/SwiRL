@@ -67,7 +67,7 @@ public struct ARNet {
     
     // updates theta by taking n gradient steps with learning rate α
     public mutating func gd(_ x: [Double], _ y: [Double], _ α: Double, _ n: Int) -> [Double] {
-        assert(x.count == self.θ.count, "length must be same as θ's")
+//        assert(x.count == self.θ.count, "length must be same as θ's")
         let m = y.count // number of training examples
         var J_history: [Double] = Array.init(repeating: 0, count: n)
         for i in 0..<n {
@@ -84,5 +84,22 @@ public struct ARNet {
         return J_history
     }
     
+    public mutating func fit(_ ts: [Double]) {
+        
+        
+    }
+    
+    /**
+     returns head and following `p` elements
+     */
+    public func sample(_ ts: [Double]) -> (Double, [Double])? {
+        if let head = ts.first {
+            let slice = ts[1..<ARNet.p]
+            if slice.count == ARNet.p {
+                return (head, Array(slice))
+            }
+        }
+        return nil
+    }
     
 }
