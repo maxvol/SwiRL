@@ -8,5 +8,8 @@
         <page name='Probability'/>
         <page name='Sampling'/>
         <page name='Distance'/>
+        <page name='EM'/>
+        <page name='VAE'/>
+        <page name='5.2'/>
     </pages>
 </playground>

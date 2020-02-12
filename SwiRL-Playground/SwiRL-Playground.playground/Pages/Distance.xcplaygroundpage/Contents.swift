@@ -25,7 +25,7 @@ for i in 0..<100 {
     J_history[i]
 }
 let p = arnet.predict(x)
-
+arnet.θ
 
 
 

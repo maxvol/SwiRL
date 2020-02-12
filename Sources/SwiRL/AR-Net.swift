@@ -32,7 +32,7 @@ public struct ARNet {
     static let c₂ = 3.0 // for normalized data and coeff within [0,1]
     
     /** AR order, i.e. amoount of coefficients/weights and lags */
-    public static let p = 12 // TEMP
+    public static let p = 6 // TEMP
     public var θ: [Double] = Array.init(repeating: Double.random(in: 0...1), count: ARNet.p)
     
     public var λ: Double { get { ARNet.c * (1.0 - ARNet.s) / ARNet.s } }
