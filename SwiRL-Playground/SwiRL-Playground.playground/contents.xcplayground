@@ -11,5 +11,6 @@
         <page name='EM'/>
         <page name='VAE'/>
         <page name='5.2'/>
+        <page name='Numerics'/>
     </pages>
 </playground>

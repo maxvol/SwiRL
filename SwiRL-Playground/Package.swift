@@ -28,6 +28,7 @@ let package = Package(
 )
 
 package.dependencies = [
+    .package(url: "https://github.com/apple/swift-numerics.git", from: "0.0.4"),
     .package(path: "/Users/maxim/github/SwiRL")
 ]
 package.targets = [.target(name: "SwiRL-Playground", dependencies: ["SwiRL"])]

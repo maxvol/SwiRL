@@ -26,3 +26,7 @@ let package = Package(
             dependencies: ["SwiRL"]),
     ]
 )
+
+package.dependencies = [
+    .package(url: "https://github.com/apple/swift-numerics.git", from: "0.0.4")
+]

@@ -85,6 +85,7 @@ public struct ARNet {
     }
     
     public mutating func fit(_ ts: [Double]) {
+//        while let sample
         
         
     }
@@ -92,14 +93,11 @@ public struct ARNet {
     /**
      returns head and following `p` elements
      */
-    public func sample(_ ts: [Double]) -> (Double, [Double])? {
-        if let head = ts.first {
-            let slice = ts[1..<ARNet.p]
-            if slice.count == ARNet.p {
-                return (head, Array(slice))
-            }
-        }
-        return nil
+    public func sample(_ ts: [Double], lag: Int = 0) -> (Double, [Double])? {
+        guard (1 + ARNet.p) * (1 + lag) <= ts.count else { return nil }
+        let head = ts[lag]
+        let slice = ts[lag + 1...lag + ARNet.p]
+        return (head, Array(slice))
     }
     
 }

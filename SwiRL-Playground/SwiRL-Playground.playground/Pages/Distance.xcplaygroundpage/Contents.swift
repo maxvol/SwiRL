@@ -19,6 +19,16 @@ for y in ts {
 }
 
 var arnet = ARNet()
+
+var (head, slice) = arnet.sample(ts) ?? (0, [])
+head
+slice
+print(head)
+print(slice)
+(head, slice) = arnet.sample(ts, 1) ?? (0, [])
+print(head)
+print(slice)
+
 let x = Array.init(repeating: Double.random(in: 0...1), count: ARNet.p)
 let J_history = arnet.gd(y, ŷ, 0.1, 100)
 for i in 0..<100 {
