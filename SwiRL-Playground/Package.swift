@@ -20,7 +20,7 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(
             name: "SwiRL-Playground",
-            dependencies: []),
+            dependencies: ["SwiRL", "Numerics"]),
         .testTarget(
             name: "SwiRL-PlaygroundTests",
             dependencies: ["SwiRL-Playground"]),
@@ -31,4 +31,4 @@ package.dependencies = [
     .package(url: "https://github.com/apple/swift-numerics.git", from: "0.0.4"),
     .package(path: "/Users/maxim/github/SwiRL")
 ]
-package.targets = [.target(name: "SwiRL-Playground", dependencies: ["SwiRL"])]
+package.targets = [.target(name: "SwiRL-Playground", dependencies: ["SwiRL", "Numerics"])]
