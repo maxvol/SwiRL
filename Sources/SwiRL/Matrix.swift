@@ -1,3 +1,11 @@
+//
+//  Matrix.swift
+//  SwiRL
+//
+//  Created by Maxim Volgin on 20/02/2020.
+//
+import Foundation
+
 public struct Matrix<T: Numeric> {
   var grid: [T] = []
   public let shape: [Int]
