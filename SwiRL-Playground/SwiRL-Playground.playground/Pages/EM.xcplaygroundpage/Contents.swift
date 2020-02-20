@@ -39,9 +39,14 @@ sigma: (C x d x d), mixture component covariance matrices
 Returns:
 gamma: (N x C), probabilities of clusters for objects
 */
-func E_step(X: [[Double]], pi: [Double], mu: [[Double]], sigma: [[[Double]]]) {
-
+func E_step(X: Matrix<Double>, pi: Matrix<Double>, mu: Matrix<Double>, sigma: Matrix<Double>) -> Matrix<Double> {
+    let N = X.shape[0] // number of objects
+    let C = pi.shape[0] // number of clusters
+    let d = mu.shape[1] // dimension of each object
+    let gamma = Matrix<Double>(0.0, shape: N, C) // distribution q(T)
     
+
+    return gamma
 }
 
 
