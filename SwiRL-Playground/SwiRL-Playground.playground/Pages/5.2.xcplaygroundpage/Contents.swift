@@ -1,6 +1,12 @@
 //: [Previous](@previous)
 
 import Foundation
+import SwiRL
+
+let p = Polynomial(-1.0, -1.5, 2.25, -3.7, 0.5)
+for x in stride(from: -10.0, through: 20.0, by: 0.05) {
+    p(x)
+}
 
 struct Function<Input, Output> {
     let raw: (Input) -> Output
