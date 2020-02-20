@@ -5,6 +5,7 @@
 import Numerics
 import Complex
 import Real
+
 let z = Complex<Double>.i
 
 func sigmoid<T: Real>(_ x: T) -> T {

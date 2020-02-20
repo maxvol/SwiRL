@@ -27,7 +27,21 @@ import SwiRL
 // L <= log p(X)
 
 
-var str = "Hello, playground"
+/**
+Performs E-step on GMM model
+Each input is numpy array:
+X: (N x d), data points
+pi: (C), mixture component weights
+mu: (C x d), mixture component means
+sigma: (C x d x d), mixture component covariance matrices
+
+Returns:
+gamma: (N x C), probabilities of clusters for objects
+*/
+func E_step(X: [[Double]], pi: [Double], mu: [[Double]], sigma: [[[Double]]]) {
+
+    
+}
 
 
 
