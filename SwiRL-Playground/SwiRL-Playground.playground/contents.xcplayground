@@ -12,5 +12,6 @@
         <page name='VAE'/>
         <page name='5.2'/>
         <page name='Numerics'/>
+        <page name='MVN'/>
     </pages>
 </playground>
