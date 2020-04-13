@@ -7,7 +7,7 @@
 import Foundation
 
 public struct Matrix<T: Numeric> {
-  private(set) var grid: [T] = []
+  public private(set) var grid: [T] = []
   public let shape: [Int]
   public var count: Int { get { self.shape.reduce(1,*) } }
 
