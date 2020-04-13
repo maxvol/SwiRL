@@ -7,7 +7,7 @@
 import Foundation
 
 public struct Matrix<T: Numeric> {
-  protected var grid: [T] = []
+  var grid: [T] = []
   public let shape: [Int]
   public var count: Int { get { self.shape.reduce(1,*) } }
 
@@ -48,6 +48,30 @@ public struct Matrix<T: Numeric> {
             grid[self.index(index)] = newValue
         }
     }
+
+}
+
+infix operator .*
+infix operator ./
+
+extension Matrix where T: Numeric {
+  
+    public static func .*(lhs: Matrix<T>, rhs: Matrix<T>) -> Matrix<T> {
+        assert(lhs.shape == rhs.shape)
+        var matrix = Matrix<T>(0, shape: lhs.shape)
+        matrix.grid = zip(lhs, rhs).map { $0.0 * $0.1}
+        return matrix
+    }
+  
+     public static func ./(lhs: Matrix<T>, rhs: Matrix<T>) -> Matrix<T> {
+        assert(lhs.shape == rhs.shape)
+        var matrix = Matrix<T>(0, shape: lhs.shape)
+        matrix.grid = zip(lhs, rhs).map { $0.0 / $0.1}
+        return matrix
+    }
+}
+
+extension Matrix where T: Numeric {
   
     public var print: String {
       var string = "shape: \(self.shape)\n"
