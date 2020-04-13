@@ -43,5 +43,30 @@ public struct Matrix<T: Numeric> {
             grid[self.index(index)] = newValue
         }
     }
+  
+    public var description: String {
+      var string = "shape: \(self.shape)\n"
+      /** 2D-only */
+      switch self.shape.count {
+      case 1:
+        for j in 0..<self.shape[0] {
+          string.append("\(self[j])\t")
+        }
+      case 2:
+        for i in 0..<self.shape[0] {
+          for j in 0..<self.shape[1] {
+            string.append("\(self[j])\t")
+          }
+          string.append("\n")
+        } 
+      default:
+        string.append("grid: \(self.grid)\n")
+      }
+      return string
+    }
+
+    public var debugDescription: String {
+      return self.description
+    }
 
 }
