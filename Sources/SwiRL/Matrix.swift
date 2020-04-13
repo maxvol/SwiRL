@@ -51,8 +51,8 @@ public struct Matrix<T: Numeric> {
 
 }
 
-public infix operator .*
-public infix operator ./
+infix operator .*
+infix operator ./
 
 public extension Matrix where T: Numeric {
   
