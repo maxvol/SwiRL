@@ -21,7 +21,7 @@ public struct Matrix<T: Numeric> {
     self.grid = Array(repeating: value, count: self.count)
   }
   
-   public init(grid: T, shape: [Int]) {
+   public init(grid: [T], shape: [Int]) {
     self.shape = shape
     self.grid = grid
   }
