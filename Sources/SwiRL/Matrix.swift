@@ -59,14 +59,14 @@ extension Matrix where T: Numeric {
     public static func .*(lhs: Matrix<T>, rhs: Matrix<T>) -> Matrix<T> {
         assert(lhs.shape == rhs.shape)
         var matrix = Matrix<T>(0, shape: lhs.shape)
-        matrix.grid = zip(lhs, rhs).map { $0.0 * $0.1}
+        matrix.grid = zip(lhs.grid, rhs.grid).map { $0.0 * $0.1}
         return matrix
     }
   
      public static func ./(lhs: Matrix<T>, rhs: Matrix<T>) -> Matrix<T> {
         assert(lhs.shape == rhs.shape)
         var matrix = Matrix<T>(0, shape: lhs.shape)
-        matrix.grid = zip(lhs, rhs).map { $0.0 / $0.1}
+        matrix.grid = zip(lhs.grid, rhs.grid).map { $0.0 / $0.1}
         return matrix
     }
 }
