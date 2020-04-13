@@ -51,10 +51,10 @@ public struct Matrix<T: Numeric> {
 
 }
 
-infix operator .*
-infix operator ./
+public infix operator .*
+public infix operator ./
 
-extension Matrix where T: Numeric {
+public extension Matrix where T: Numeric {
   
     public static func .*(lhs: Matrix<T>, rhs: Matrix<T>) -> Matrix<T> {
         assert(lhs.shape == rhs.shape)
@@ -65,7 +65,7 @@ extension Matrix where T: Numeric {
 
 }
 
-extension Matrix where T: FloatingPoint {
+public extension Matrix where T: FloatingPoint {
 
      public static func ./(lhs: Matrix<T>, rhs: Matrix<T>) -> Matrix<T> {
         assert(lhs.shape == rhs.shape)
@@ -75,7 +75,7 @@ extension Matrix where T: FloatingPoint {
     }
 }
 
-extension Matrix where T: Numeric {
+public extension Matrix where T: Numeric {
   
     public var print: String {
       var string = "shape: \(self.shape)\n"
