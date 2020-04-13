@@ -7,7 +7,7 @@
 import Foundation
 
 public struct Matrix<T: Numeric> {
-  var grid: [T] = []
+  private(set) var grid: [T] = []
   public let shape: [Int]
   public var count: Int { get { self.shape.reduce(1,*) } }
 
@@ -19,6 +19,11 @@ public struct Matrix<T: Numeric> {
    public init(_ value: T, shape: [Int]) {
     self.shape = shape
     self.grid = Array(repeating: value, count: self.count)
+  }
+  
+   public init(grid: T, shape: [Int]) {
+    self.shape = shape
+    self.grid = grid
   }
 
   func indexIsValid(_ index: [Int]) -> Bool {
