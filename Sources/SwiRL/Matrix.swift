@@ -15,6 +15,11 @@ public struct Matrix<T: Numeric> {
     self.shape = shape
     self.grid = Array(repeating: value, count: self.count)
   }
+  
+   public init(_ value: T, shape: [Int]) {
+    self.shape = shape
+    self.grid = Array(repeating: value, count: self.count)
+  }
 
   func indexIsValid(_ index: [Int]) -> Bool {
     return zip(index, self.shape)
