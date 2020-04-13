@@ -76,7 +76,7 @@ public extension Matrix where T: FloatingPoint {
     }
 }
 
-public extension Matrix where T: Numeric {
+public extension Matrix where T: BinaryInteger {
 
      public static func .%(lhs: Matrix<T>, rhs: Matrix<T>) -> Matrix<T> {
         assert(lhs.shape == rhs.shape)
