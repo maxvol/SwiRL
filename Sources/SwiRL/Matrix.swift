@@ -55,7 +55,7 @@ public struct Matrix<T: Numeric> {
       case 2:
         for i in 0..<self.shape[0] {
           for j in 0..<self.shape[1] {
-            string.append("\(self[j])\t")
+            string.append("\(self[i, j])\t")
           }
           string.append("\n")
         } 
