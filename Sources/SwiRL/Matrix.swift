@@ -44,7 +44,7 @@ public struct Matrix<T: Numeric> {
         }
     }
   
-    public var description: String {
+    public var print: String {
       var string = "shape: \(self.shape)\n"
       /** 2D-only */
       switch self.shape.count {
@@ -63,10 +63,6 @@ public struct Matrix<T: Numeric> {
         string.append("grid: \(self.grid)\n")
       }
       return string
-    }
-
-    public var debugDescription: String {
-      return self.description
     }
 
 }
