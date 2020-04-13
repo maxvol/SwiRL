@@ -62,7 +62,11 @@ extension Matrix where T: Numeric {
         matrix.grid = zip(lhs.grid, rhs.grid).map { $0.0 * $0.1}
         return matrix
     }
-  
+
+}
+
+extension Matrix where T: FloatingPoint {
+
      public static func ./(lhs: Matrix<T>, rhs: Matrix<T>) -> Matrix<T> {
         assert(lhs.shape == rhs.shape)
         var matrix = Matrix<T>(0, shape: lhs.shape)
