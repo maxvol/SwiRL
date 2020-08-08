@@ -85,11 +85,13 @@ struct SWF: RLEnvironment1 {
 struct SWFPolicy: RLPolicy1 {
     typealias A = SWFAction
     func action(for state: RLState1) -> A {
-        .left
+        .left // 0.035643175
+//        .right // 0.9635216
     }
 }
 
 let ipe = IterativePolicyEvaluation<SWF, SWFPolicy>()
 ipe.evaluate(environment: SWF(), policy: SWFPolicy())
+print(ipe.bootstrap[3]!) // initial state
 
 //: [Next](@next)

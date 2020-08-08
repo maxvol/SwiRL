@@ -53,7 +53,7 @@ fileprivate let zero: RLValue = 0.0
 // reference implementation, very inefficient
 public class IterativePolicyEvaluation<E: RLEnvironment1, P: RLPolicy1> where E.A == P.A {
     
-    private (set) var bootstrap: [RLState1: RLValue] = [:]
+    public private(set) var bootstrap: [RLState1: RLValue] = [:]
     
     public init() {}
     
