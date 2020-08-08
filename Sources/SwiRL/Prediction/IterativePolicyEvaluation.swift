@@ -77,7 +77,7 @@ public class IterativePolicyEvaluation<E: RLEnvironment1, P: RLPolicy1> where E.
             let didConverge = self.didConverge(V, theta: theta)
             self.bootstrap = V
 
-            print("#\(iteration): \(V)")
+            print("#\(iteration): \(V.sorted { $0.key < $1.key }.map { String(format: "%.4f", $0.value) })")
             
             if didConverge {
                 print("converged!")
@@ -93,13 +93,17 @@ public class IterativePolicyEvaluation<E: RLEnvironment1, P: RLPolicy1> where E.
     }
     
     private func didConverge(_ V: [RLState1: RLValue], theta: RLValue) -> Bool {
-        zip(
+        let count = bootstrap.count
+        guard count > 0 else {
+            return false
+        }
+        return zip(
             bootstrap.sorted { $0.key < $1.key },
             V.sorted { $0.key < $1.key }
         )
         .map { abs($0.value - $1.value) < theta }
-        .filter { !$0 }
-        .count > 0
+        .filter { $0 }
+        .count == count
     }
         
 }

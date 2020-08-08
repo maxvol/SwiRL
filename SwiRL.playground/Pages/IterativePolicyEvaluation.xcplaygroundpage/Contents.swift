@@ -14,13 +14,6 @@ enum SWFOutcome: RLValue {
     case backward = 0.1666
 }
 
-//public struct RLOutcome {
-//    let probability: RLValue
-//    let next: RLState1
-//    let reward: RLValue
-//    let done: Bool
-//}
-
 typealias RLActionToOutcome = [SWFAction: [RLOutcome]]
 typealias RLStateToActionToOutcome = [RLState1: RLActionToOutcome]
 
@@ -74,14 +67,14 @@ struct SWF: RLEnvironment1 {
             let reward: RLValue = key == 5 ? 1.0 : 0.0
             P[key] = [
                 .left: [
-                    RLOutcome(probability: SWFOutcome.forward.rawValue, next: lhs, reward: 0.0, done: true),
+                    RLOutcome(probability: SWFOutcome.forward.rawValue, next: lhs, reward: 0.0, done: key == 1),
                     RLOutcome(probability: SWFOutcome.stay.rawValue, next: key, reward: 0.0, done: false),
-                    RLOutcome(probability: SWFOutcome.backward.rawValue, next: rhs, reward: reward, done: false)
+                    RLOutcome(probability: SWFOutcome.backward.rawValue, next: rhs, reward: reward, done: key == 5)
                 ],
                 .right: [
-                    RLOutcome(probability: SWFOutcome.forward.rawValue, next: rhs, reward: reward, done: true),
+                    RLOutcome(probability: SWFOutcome.forward.rawValue, next: rhs, reward: reward, done: key == 5),
                     RLOutcome(probability: SWFOutcome.stay.rawValue, next: key, reward: 0.0, done: false),
-                    RLOutcome(probability: SWFOutcome.backward.rawValue, next: lhs, reward: 0.0, done: false)
+                    RLOutcome(probability: SWFOutcome.backward.rawValue, next: lhs, reward: 0.0, done: key == 1)
                 ]
             ]
         }
