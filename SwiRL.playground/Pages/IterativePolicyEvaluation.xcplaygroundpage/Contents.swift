@@ -86,22 +86,22 @@ struct SWF: RLEnvironment1 {
     
 }
 
-struct SWFPolicy: RLPolicy1 {
-    typealias A = SWFAction
-    func action(for state: RLState1) -> A {
-        .left // 0.035643175
-//        .right // 0.9635216
-    }
-}
-
 let swf = SWF()
-let left = SWFPolicy()
-let ipe = IterativePolicyEvaluation<SWF, SWFPolicy>()
+let left = RLDeterministicPolicy<SWFAction>(
+    Array<Int>(repeating: SWFAction.left.rawValue, count: swf.stateSpace.count)
+)
+//.left // 0.035643175
+//.right // 0.9635216
+let ipe = IterativePolicyEvaluation<SWF, RLDeterministicPolicy<SWFAction>>()
 ipe.evaluate(environment: swf, policy: left)
 print(ipe.bootstrap[3]!) // initial state
 
 let pi = PolicyImprovement<SWF>()
 pi.improve(environment: swf, V: ipe.bootstrap)
 print(pi.P)
+
+let piter = PolicyIteraton<SWF>()
+piter.iterate(environment: swf)
+print(piter.optimalPolicy!.table)
 
 //: [Next](@next)

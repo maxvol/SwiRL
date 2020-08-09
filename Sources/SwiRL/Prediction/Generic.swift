@@ -10,7 +10,7 @@ import Foundation
 public typealias RLState1 = Int
 public typealias RLValue = Float
 
-public protocol RLAction1 {
+public protocol RLAction1: CaseIterable {
     var rawValue: Int { get }
     init?(rawValue: Int)
 }
@@ -19,6 +19,40 @@ public protocol RLPolicy1 {
     associatedtype A: RLAction1
     
     func action(for state: RLState1) -> A
+}
+
+public class RLDeterministicPolicy<A: RLAction1>: RLPolicy1 {
+    public private(set) var table: [Int] = [] // state is index
+    
+    public init(_ table: [Int]) {
+        self.table = table
+    }
+    
+    public convenience init(stateCount: Int) {
+        self.init(
+            Array<Int>(repeating: 0, count: stateCount)
+                .map { _ in A.allCases.randomElement()!.rawValue }
+        )
+    }
+    
+    public func action(for state: RLState1) -> A {
+        A(rawValue: table[state])!
+    }
+}
+
+// TODO: implement
+public class RLStochasticPolicy<A: RLAction1>: RLPolicy1 {
+    private var table: [[(Int, RLValue)]] = [] // state is index
+    
+    public init(_ table: [[(Int, RLValue)]]) {
+        self.table = table
+    }
+    
+    public func action(for state: RLState1) -> A {
+        let actionProbability = table[state]
+        // TODO:
+        return A(rawValue: actionProbability.first!.0)!
+    }
 }
 
 public struct RLOutcome {

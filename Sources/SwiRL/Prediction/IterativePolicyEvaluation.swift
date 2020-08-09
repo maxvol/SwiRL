@@ -26,7 +26,7 @@ public class IterativePolicyEvaluation<E: RLEnvironment1, P: RLPolicy1> where E.
                 var value: RLValue = 0.0
                 let action = policy.action(for: state)
                 
-                for outcome in environment.outcomeSpace(for: state, action: action) {
+                for outcome in environment.outcomeSpace(for: state, action: action as! E.A) {
                     value += self.value(for: outcome, gamma: gamma)
                 }
                 
