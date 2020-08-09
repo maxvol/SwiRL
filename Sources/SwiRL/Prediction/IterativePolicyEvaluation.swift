@@ -7,47 +7,6 @@
 
 import Foundation
 
-public typealias RLState1 = Int
-public typealias RLValue = Float
-
-public protocol RLAction1 {}
-
-public protocol RLPolicy1 {
-    associatedtype A: RLAction1
-    
-    func action(for state: RLState1) -> A
-}
-
-public struct RLOutcome {
-    public let probability: RLValue
-    public let next: RLState1
-    public let reward: RLValue
-    public let done: Bool
-    
-    public init(probability: RLValue, next: RLState1, reward: RLValue, done: Bool) {
-        self.probability = probability
-        self.next = next
-        self.reward = reward
-        self.done = done
-    }
-}
-
-//typealias RLActionToOutcome = [RLAction1: [RLOutcome]]
-//typealias RLStateToActionToOutcome = [RLState1: RLActionToOutcome]
-//
-//struct RLModel {
-//    let P: RLStateToActionToOutcome = [:]
-//}
-
-public protocol RLEnvironment1 {
-    
-    associatedtype A: RLAction1
-    
-    var stateSpace: [RLState1] { get }
-//    func actionSpace(for state: RLState1) -> [RLAction1]
-    func outcomeSpace(for state: RLState1, action: A) -> [RLOutcome]
-}
-
 fileprivate let zero: RLValue = 0.0
 
 // reference implementation, very inefficient
@@ -57,7 +16,7 @@ public class IterativePolicyEvaluation<E: RLEnvironment1, P: RLPolicy1> where E.
     
     public init() {}
     
-    public func evaluate(environment: E, policy: P, gamma: RLValue = 1.0, theta: RLValue = 1e-10, maxIterationCount: Int = 1000) {
+    public func evaluate(environment: E, policy: P, gamma: RLValue = 1.0, theta: RLValue = 1e-10, maxIterationCount: Int = 1000, verbose: Bool = false) {
                
         for iteration in 0..<maxIterationCount {
             
@@ -77,7 +36,9 @@ public class IterativePolicyEvaluation<E: RLEnvironment1, P: RLPolicy1> where E.
             let didConverge = self.didConverge(V, theta: theta)
             self.bootstrap = V
 
-            print("#\(iteration): \(V.sorted { $0.key < $1.key }.map { String(format: "%.4f", $0.value) })")
+            if verbose {
+                print("#\(iteration): \(V.sorted { $0.key < $1.key }.map { String(format: "%.4f", $0.value) })")
+            }
             
             if didConverge {
                 print("converged!")

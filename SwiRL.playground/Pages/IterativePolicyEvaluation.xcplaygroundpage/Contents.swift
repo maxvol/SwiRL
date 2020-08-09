@@ -3,7 +3,7 @@
 import Foundation
 import SwiRL
 
-enum SWFAction: RLAction1 {
+enum SWFAction: Int, RLAction1 {
     case left
     case right
 }
@@ -53,6 +53,10 @@ struct SWF: RLEnvironment1 {
     
     var stateSpace: [RLState1] { get { Array(P.keys) } }
     
+    func actionSpace(for state: RLState1) -> [SWFAction] {
+        [.left, .right]
+    }
+        
     func outcomeSpace(for state: RLState1, action: A) -> [RLOutcome] {
         P[state]![action]!
     }
@@ -90,8 +94,14 @@ struct SWFPolicy: RLPolicy1 {
     }
 }
 
+let swf = SWF()
+let left = SWFPolicy()
 let ipe = IterativePolicyEvaluation<SWF, SWFPolicy>()
-ipe.evaluate(environment: SWF(), policy: SWFPolicy())
+ipe.evaluate(environment: swf, policy: left)
 print(ipe.bootstrap[3]!) // initial state
+
+let pi = PolicyImprovement<SWF>()
+pi.improve(environment: swf, V: ipe.bootstrap)
+print(pi.P)
 
 //: [Next](@next)
