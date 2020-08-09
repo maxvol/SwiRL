@@ -18,7 +18,7 @@ public class PolicyImprovement<E: RLEnvironment1> {
     
     public func improve(environment: E, V: [RLState1: RLValue], gamma: RLValue = 1.0) {
         let stateCount = environment.stateSpace.count
-        let actionCount = environment.actionSpace(for: environment.stateSpace.first!).count // TODO should be max actually
+        let actionCount = E.A.allCases.count
         var Q: [[RLValue]] = Array<Array<RLValue>>(repeating: Array<RLValue>(repeating: 0.0, count: actionCount), count: stateCount)
         
         for s in environment.stateSpace {

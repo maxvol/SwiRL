@@ -104,4 +104,8 @@ let piter = PolicyIteraton<SWF>()
 piter.iterate(environment: swf)
 print(piter.optimalPolicy!.table)
 
+let vi = ValueIteration<SWF>()
+vi.iterate(environment: swf)
+print(vi.optimalPolicy!.table)
+
 //: [Next](@next)
