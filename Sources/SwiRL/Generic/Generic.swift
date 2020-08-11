@@ -55,6 +55,40 @@ public class RLStochasticPolicy<A: RLAction1>: RLPolicy1 {
     }
 }
 
+public struct RLExperience<A: RLAction1> {
+    /** Sₜ */
+    public let state: RLState1
+    /** Aₜ */
+    public let action: A
+    /** Rₜ₊₁ */
+    public let reward: RLValue
+    /** Sₜ₊₁ */
+    public let next: RLState1
+    
+    public init(state: RLState1, action: A, reward: RLValue, next: RLState1) {
+        self.state = state
+        self.action = action
+        self.reward = reward
+        self.next = next
+    }
+}
+
+public struct RLExperience1<A: RLAction1> {
+    public let Sₜ : RLState1
+    public let Aₜ : A
+    public let Rₜ₊₁: RLValue
+    public let Sₜ₊₁: RLState1
+    
+    public init(Sₜ: RLState1, Aₜ: A, Rₜ₊₁: RLValue, Sₜ₊₁: RLState1) {
+        self.Sₜ = Sₜ
+        self.Aₜ = Aₜ
+        self.Rₜ₊₁ = Rₜ₊₁
+        self.Sₜ₊₁ = Sₜ₊₁
+    }
+}
+
+//typealias RLTrajectory = [RLExperience]
+
 public struct RLOutcome {
     public let probability: RLValue
     public let next: RLState1
@@ -86,6 +120,14 @@ public protocol RLEnvironment1 {
 }
 
 // MARK: - functions
+
+public func G<A: RLAction1>(trajectory: [RLExperience<A>], gamma: RLValue = 1.0) -> RLValue {
+    trajectory.map { $0.reward }.enumerated().map { pow(gamma, RLValue($0)) * $1 as RLValue }.reduce(0.0, +)
+}
+
+public func G<A: RLAction1>(trajectory: [RLExperience1<A>], gamma: RLValue = 1.0) -> RLValue {
+    trajectory.map { $0.Rₜ₊₁ }.enumerated().map { pow(gamma, RLValue($0)) * $1 as RLValue }.reduce(0.0, +)
+}
 
 public func argmax(_ array: [RLValue]) -> Int {
     var argmax: (Int, RLValue) = (-1, -RLValue.infinity)
