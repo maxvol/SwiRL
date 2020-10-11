@@ -7,24 +7,24 @@
 
 import Foundation
 
-fileprivate let zero: RLValue = 0.0
+fileprivate let zero: Float = 0.0
 
 // reference implementation, very inefficient
-public class PolicyImprovement<E: RLEnvironment1> {
+public class PolicyImprovement<E: RLEnvironment1> where E.Value == Float {
     
     public private(set) var P: [Int] = []
     
     public init() {}
     
-    public func improve(environment: E, V: [RLState1: RLValue], gamma: RLValue = 1.0) {
+    public func improve(environment: E, V: [E.State.ID: E.Value], gamma: E.Value = Float(1.0)) {
         let stateCount = environment.stateSpace.count
-        let actionCount = E.A.allCases.count
-        var Q: [[RLValue]] = Array<Array<RLValue>>(repeating: Array<RLValue>(repeating: 0.0, count: actionCount), count: stateCount)
+        let actionCount = E.Action.allCases.count
+        var Q: [[E.Value]] = Array<Array<E.Value>>(repeating: Array<E.Value>(repeating: 0.0, count: actionCount), count: stateCount)
         
         for s in environment.stateSpace {
             for a in environment.actionSpace(for: s) {
                 for o in environment.outcomeSpace(for: s, action: a) {
-                    Q[s][a.rawValue] += self.value(for: o, in: V, gamma: gamma)
+                    Q[s.id][a.rawValue] += self.value(for: o, in: V, gamma: gamma)
                 }
             }
         }
@@ -34,7 +34,7 @@ public class PolicyImprovement<E: RLEnvironment1> {
   
     }
     
-    private func policy(Q: [[RLValue]]) -> [Int] {
+    private func policy(Q: [[E.Value]]) -> [Int] {
         var P: [Int] = Array<Int>(repeating: -1, count: Q.count)
         for (s, q) in Q.enumerated() {
             P[s] = argmax(q)
@@ -42,8 +42,8 @@ public class PolicyImprovement<E: RLEnvironment1> {
         return P
     }
     
-    private func value(for outcome: RLOutcome, in V: [RLState1: RLValue], gamma: RLValue) -> RLValue {
-        let expected = outcome.done ? zero : (gamma * (V[outcome.next] ?? zero))
+    private func value(for outcome: RLOutcome<E.State, E.Value>, in V: [E.State.ID: E.Value], gamma: E.Value) -> E.Value {
+        let expected = outcome.done ? zero : (gamma * (V[outcome.next.id] ?? zero))
         return outcome.probability * (outcome.reward + expected)
     }
         

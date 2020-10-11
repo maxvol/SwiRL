@@ -43,7 +43,7 @@ public func Β(_ x: [Double]) -> Double {
 //float tgammaf (float x)
 //long double tgammal (long double x)
 
-public func argmax<Key, Value>(_ dictionary: Dictionary<Key, Value>) -> Key? where Key : Hashable, Value: Comparable {
+public func argmax<Key, Value>(_ dictionary: Dictionary<Key, Value>) -> Key? where Key: Hashable, Value: Comparable {
     guard let max = dictionary.max(by: { lhs, rhs in lhs.value < rhs.value }) else { return nil }
     let ties = dictionary.filter { element in element.value == max.value }
     guard let random = ties.randomElement() else { return nil }

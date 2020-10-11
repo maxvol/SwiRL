@@ -7,28 +7,28 @@
 
 import Foundation
 
-fileprivate let zero: RLValue = 0.0
+fileprivate let zero: Float = 0.0
 
 // reference implementation, very inefficient
-public class PolicyIteraton<E: RLEnvironment1> {
+public class PolicyIteraton<E: RLEnvironment1> where E.Value == Float {
     
-    public private(set) var optimalPolicy: RLDeterministicPolicy<E.A>? = nil
+    public private(set) var optimalPolicy: RLDeterministicPolicy<E.State, E.Action>? = nil
     
     public init() {}
     
-    public func iterate(environment: E, gamma: RLValue = 1.0, theta: RLValue = 1e-10) {
+    public func iterate(environment: E, gamma: E.Value = Float(1.0), theta: E.Value = Float(1e-10)) {
         let stateCount = environment.stateSpace.count
         var P = Array<Int>(repeating: 0, count: stateCount)
-            .map { _ in E.A.allCases.randomElement()!.rawValue }
+            .map { _ in E.Action.allCases.randomElement()!.rawValue }
         
         while true {
-            let policy = RLDeterministicPolicy<E.A>(P)
-            let ipe = IterativePolicyEvaluation<E, RLDeterministicPolicy<E.A>>()
+            let policy = RLDeterministicPolicy<E.State, E.Action>(P)
+            let ipe = IterativePolicyEvaluation<E, RLDeterministicPolicy<E.State, E.Action>>()
             ipe.evaluate(environment: environment, policy: policy, gamma: gamma, theta: theta)
             let pi = PolicyImprovement<E>()
             pi.improve(environment: environment, V: ipe.bootstrap)
             if zip(pi.P, P).map { $0 != $1 }.filter { $0 }.count == 0 {
-                self.optimalPolicy = RLDeterministicPolicy<E.A>(pi.P)
+                self.optimalPolicy = RLDeterministicPolicy<E.State, E.Action>(pi.P)
                 break
             }
             P = pi.P
