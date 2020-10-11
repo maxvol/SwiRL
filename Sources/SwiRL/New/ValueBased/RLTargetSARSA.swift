@@ -15,6 +15,14 @@ public struct RLTargetSARSA<State: RLState, Action: RLAction, Value: RLValue>: R
     public let nextState: State
     public let nextAction: Action
     
+    public init(reward: Value, discount: Value, value: @escaping (State, Action) -> Value, nextState: State, nextAction: Action) {
+        self.reward = reward
+        self.discount = discount
+        self.value = value
+        self.nextState = nextState
+        self.nextAction = nextAction
+    }
+    
     public func callAsFunction() -> Value {
         RLTargetSARSA.expectedReturn(reward: reward, discount: discount, value: value, state: nextState, action: nextAction)
     }

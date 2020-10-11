@@ -15,6 +15,14 @@ public struct RLTargetQLearning<State: RLState, Action: RLAction, Value: RLValue
     public let nextState: State
     public let actionSpace: [Action]
     
+    public init(reward: Value, discount: Value, value: @escaping (State, Action) -> Value, nextState: State, actionSpace: [Action]) {
+        self.reward = reward
+        self.discount = discount
+        self.value = value
+        self.nextState = nextState
+        self.actionSpace = actionSpace
+    }
+    
     public func callAsFunction() -> Value {
         RLTargetQLearning.expectedReturn(reward: reward, discount: discount, value: value, state: nextState, actionSpace: actionSpace)
     }
