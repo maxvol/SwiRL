@@ -12,10 +12,10 @@ public typealias RLValue = FloatingPoint
 public protocol RLKey {}
 
 public struct RLKeyV<State: RLState>: RLKey {
-    let state: State
+    public let state: State
 }
 
 public struct RLKeyQ<State: RLState, Action: RLAction>: RLKey {
-    let state: State
-    let action: Action
+    public let state: State
+    public let action: Action
 }
