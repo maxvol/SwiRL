@@ -8,15 +8,17 @@
 import Foundation
 
 public protocol RLEnvironment {
+    associatedtype Value: RLValue
     associatedtype Action: RLAction
-    associatedtype Experience: RLExperience
+    associatedtype Observation: RLObservation
+//    associatedtype Experience: RLExperience
 
-    func perform(action intended: Action) -> Experience
+//    func perform(action intended: Action) -> Experience
+    
+    func reset() -> RLStep<Observation, Value>
+    func step(action intended: Action) -> RLStep<Observation, Value>
+    
+//    func T(_ obs: RLObservation, _ action: RLAction, _ nextObs: RLObservation) -> RLValue
+//    func R(_ obs: RLObservation, _ action: RLAction?, _ nextObs: RLObservation?) -> RLValue
+
 }
-
-//protocol RLEnvironment {
-//    func T(_ obs: RLObservation, _ action: RLAction, _ nextObs: RLObservation) -> RLReward // scalar
-//    func R(_ obs: RLObservation, _ action: RLAction?, _ nextObs: RLObservation?) -> RLReward // scalar
-//}
-//
-//
