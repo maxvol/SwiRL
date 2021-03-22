@@ -18,7 +18,4 @@ public protocol RLEnvironment {
     func reset() -> RLStep<Observation, Value>
     func step(action intended: Action) -> RLStep<Observation, Value>
     
-//    func T(_ obs: RLObservation, _ action: RLAction, _ nextObs: RLObservation) -> RLValue
-//    func R(_ obs: RLObservation, _ action: RLAction?, _ nextObs: RLObservation?) -> RLValue
-
 }
