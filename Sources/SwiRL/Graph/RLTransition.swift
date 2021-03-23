@@ -16,6 +16,12 @@ public protocol RLTransition: Edge {
     var reward: Value { get }
 }
 
+public extension RLTransition {
+    func render() -> String {
+        "\(from) -> \(to) [label='\(reward)'];"
+    }
+}
+
 //public protocol Transition: Edge  {
 //    associatedtype Value: RLValue
 //

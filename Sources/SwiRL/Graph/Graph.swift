@@ -30,6 +30,35 @@ public protocol Graph {
 
 // TODO: adjacenty (A), degree (D), laplacian (L = D - A)
 
+// MARK: - render
+
+public extension Vertex {
+    func render() -> String {
+        "\(id);"
+    }
+}
+
+public extension Edge {
+    func render() -> String {
+        "\(from) -> \(to);"
+    }
+}
+
+public extension Graph {
+    func render() -> String {
+        var gv = ["digraph G {"]
+        for v in vertices {
+            gv.append(v.render())
+        }
+        for e in edges {
+            gv.append(e.render())
+        }
+        gv.append("}")
+        return gv.joined(separator: "\n")
+    }
+}
+
+
 // MARK: - test
 
 struct Entry: Vertex {
@@ -52,4 +81,5 @@ struct Storage: Graph {
     var vertices: [Entry]
     var edges: [Relation]
 }
+
 
