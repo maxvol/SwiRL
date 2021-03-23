@@ -34,13 +34,13 @@ public protocol Graph {
 
 public extension Vertex {
     func render() -> String {
-        "\(id);"
+        "\tV\(id);"
     }
 }
 
 public extension Edge {
     func render() -> String {
-        "\(from) -> \(to);"
+        "\tV\(from) -> V\(to);"
     }
 }
 
