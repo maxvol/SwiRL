@@ -7,13 +7,17 @@
 
 import Foundation
 
-//public struct RLTransition<Observation: RLObservation, Value: RLValue> {
-//    let observation: Observation
-//    let reward: Value
+//public protocol RLNode: RLState, Vertex {
 //}
 
-//public struct RLTransition<Value: RLValue>: Transition {
-//    public typealias ID = <#type#>
+public protocol RLTransition: Edge {
+    associatedtype Value: RLValue
+        
+    var reward: Value { get }
+}
+
+//public protocol Transition: Edge  {
+//    associatedtype Value: RLValue
 //
-//    let reward: Value
+//    var probability: Value { get }
 //}

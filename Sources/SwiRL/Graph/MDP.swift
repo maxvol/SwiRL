@@ -7,29 +7,12 @@
 
 import Foundation
 
-public protocol Transition: Edge {
-    associatedtype Value: RLValue
-    
-    var probability: Value { get }
-}
 
-public protocol RLTransition: Transition {
-    associatedtype Value: RLValue
-    
-    var reward: Value { get }
-}
-
-//public struct RLTransition<Value: RLValue>: Transition {
-//    public typealias ID = <#type#>
+//public protocol MDP: Graph {
 //
-//    let reward: Value
 //}
-
-public protocol MDP: Graph {
-    
-}
-
-protocol RLMDP {
+//
+//public protocol RLMDP {
     
 //    func transition(state: RLState, action: RLAction) -> RLState
 //
@@ -38,7 +21,7 @@ protocol RLMDP {
 //    func T(_ obs: RLObservation, _ action: RLAction, _ nextObs: RLObservation) -> RLValue
 //    func R(_ obs: RLObservation, _ action: RLAction?, _ nextObs: RLObservation?) -> RLValue
 
-}
+//}
 
 
 /*
