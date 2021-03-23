@@ -11,6 +11,8 @@ public protocol Vertex {
     associatedtype ID: Hashable
         
     var id: ID { get }
+    
+    func render() -> String
 }
 
 public protocol Edge {
@@ -18,6 +20,8 @@ public protocol Edge {
 
     var from: ID { get }
     var to: ID { get }
+    
+    func render() -> String
 }
 
 public protocol Graph {
@@ -26,6 +30,8 @@ public protocol Graph {
     
     var vertices: [V] { get }
     var edges: [E] { get }
+    
+    func render() -> String
 }
 
 // TODO: adjacenty (A), degree (D), laplacian (L = D - A)
