@@ -8,9 +8,9 @@
 import Foundation
 
 public protocol RLAgent: RLPolicy {
-    associatedtype Experience: RLExperience
-    associatedtype Target: RLTarget where Target.Value == Experience.Value
+    associatedtype Target: RLTarget // where Target.Value == Experience.Value
+//    associatedtype Experience: RLExperience<Observation, Action, Target.Value>
 
     func action(for observation: Observation) -> Action
-    mutating func reflect(upon experience: Experience)
+    mutating func reflect(upon experience: RLExperience<Observation, Action, Target.Value>)
 }

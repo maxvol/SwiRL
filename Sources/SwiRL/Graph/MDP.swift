@@ -7,6 +7,28 @@
 
 import Foundation
 
+public protocol Transition: Edge {
+    associatedtype Value: RLValue
+    
+    var probability: Value { get }
+}
+
+public protocol RLTransition: Transition {
+    associatedtype Value: RLValue
+    
+    var reward: Value { get }
+}
+
+//public struct RLTransition<Value: RLValue>: Transition {
+//    public typealias ID = <#type#>
+//
+//    let reward: Value
+//}
+
+public protocol MDP: Graph {
+    
+}
+
 protocol RLMDP {
     
 //    func transition(state: RLState, action: RLAction) -> RLState
@@ -19,6 +41,7 @@ protocol RLMDP {
 }
 
 
+/*
 class MDP {
 //    let S: RLState
 //    let A: RLAction
@@ -33,4 +56,4 @@ class POMDP: MDP {
 //    let O: RLObservation
 //    let E: RLProbability // emission probability of O given S
 }
-
+*/

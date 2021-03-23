@@ -7,20 +7,16 @@
 
 import Foundation
 
-public protocol RLExperience {
-    associatedtype Observation: RLObservation
-    associatedtype Action: RLAction
-    associatedtype Value: RLValue
-    
+public struct RLExperience<Observation: RLObservation, Action: RLAction, Value: RLValue> {
     /** Oₜ */
-    var observation: Observation { get }
+    let observation: Observation
     /** Aₜ */
-    var action: Action { get }
+    let action: Action
     /** Rₜ₊₁ */
-    var reward: Value { get }
+    let reward: Value
     /** Oₜ₊₁ */
-    var nextObservation: Observation { get }
+    let nextObservation: Observation
     /** episode is finished */
-    var isFinal: Bool { get }
+    let isFinal: Bool
 }
 
