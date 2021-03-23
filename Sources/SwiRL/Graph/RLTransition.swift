@@ -18,7 +18,7 @@ public protocol RLTransition: Edge {
 
 public extension RLTransition {
     func render() -> String {
-        "\tV\(from) -> V\(to) [label='\(reward)'];"
+        "\tV\(from) -> V\(to) [label=\"\(reward)\"];"
     }
 }
 
