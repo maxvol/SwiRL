@@ -9,14 +9,14 @@ import Foundation
 
 public struct RLExperience<Observation: RLObservation, Action: RLAction, Value: RLValue> {
     /** Oₜ */
-    let observation: Observation
+    public let observation: Observation
     /** Aₜ */
-    let action: Action
+    public let action: Action
     /** Rₜ₊₁ */
-    let reward: Value
+    public let reward: Value
     /** Oₜ₊₁ */
-    let nextObservation: Observation
+    public let nextObservation: Observation
     /** episode is finished */
-    let isFinal: Bool
+    public let isFinal: Bool
 }
 

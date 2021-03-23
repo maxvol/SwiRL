@@ -8,10 +8,10 @@
 import Foundation
 
 public struct RLTrajectory<Observation: RLObservation, Action: RLAction, Value: RLValue> {
-    var experiences: [RLExperience<Observation, Action, Value>] = []
+    public var experiences: [RLExperience<Observation, Action, Value>] = []
     
-    var isEmpty: Bool { get { experiences.isEmpty } }
-    var isComplete: Bool { get { experiences.last?.isFinal ?? false } }
+    public var isEmpty: Bool { get { experiences.isEmpty } }
+    public var isComplete: Bool { get { experiences.last?.isFinal ?? false } }
 }
 
 /**
