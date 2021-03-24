@@ -7,7 +7,7 @@
 
 import Foundation
 
-public protocol Vertex {
+public protocol Vertex: Hashable {
     associatedtype ID: Hashable
         
     var id: ID { get }
@@ -15,7 +15,7 @@ public protocol Vertex {
     func render() -> String
 }
 
-public protocol Edge {
+public protocol Edge: Hashable {
     associatedtype ID: Hashable
 
     var from: ID { get }
@@ -28,13 +28,30 @@ public protocol Graph {
     associatedtype V: Vertex
     associatedtype E: Edge where E.ID == V.ID
     
-    var vertices: [V] { get }
-    var edges: [E] { get }
+    var vertices: Set<V> { get }
+    var edges: Set<E> { get }
     
     func render() -> String
 }
 
 // TODO: adjacenty (A), degree (D), laplacian (L = D - A)
+
+// MARK: - hash
+
+public extension Vertex {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+}
+
+public extension Edge {
+    func hash(into hasher: inout Hasher) {
+        func hash(into hasher: inout Hasher) {
+            hasher.combine(from)
+            hasher.combine(to)
+        }
+    }
+}
 
 // MARK: - render
 
@@ -84,8 +101,8 @@ struct Storage: Graph {
     typealias V = Entry
     typealias E = Relation
 
-    var vertices: [Entry]
-    var edges: [Relation]
+    var vertices: Set<Entry>
+    var edges: Set<Relation>
 }
 
 
