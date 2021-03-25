@@ -11,8 +11,8 @@ import Foundation
 public protocol RLMDP: Graph where V: RLObservation, E: RLTransition {
     associatedtype A: RLAction where A.ID == E.Action.ID
 
-    func probability(from: V.ID, via: A.ID, to: V.ID) -> E.Value
-    func reward(from: V.ID, via: A.ID, to: V.ID) -> E.Value
+//    func probability(from: V.ID, via: A.ID, to: V.ID) -> E.Value
+//    func reward(from: V.ID, via: A.ID, to: V.ID) -> E.Value
 }
 
 
