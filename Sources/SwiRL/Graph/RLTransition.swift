@@ -32,6 +32,6 @@ public extension RLTransition {
 
 public extension RLTransition {
     func render() -> String {
-        "\tV\(from) -> V\(to) [label=\"A: \(via), P: \(probability), R: \(reward)\"];"
+        "\tV\(from) -> V\(to) [label=\"A:\(via), P:\(probability), R:\(reward)\"];"
     }
 }
