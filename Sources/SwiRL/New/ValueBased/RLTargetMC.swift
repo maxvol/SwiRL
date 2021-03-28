@@ -5,7 +5,6 @@
 //  Created by Maxim Volgin on 11/10/2020.
 //
 
-import Numerics
 import Foundation
 
 public struct RLTargetMC<State: RLState, Value: RLValue>: RLTarget {
