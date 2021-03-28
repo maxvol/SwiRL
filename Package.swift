@@ -31,5 +31,5 @@ let package = Package(
 )
 
 package.dependencies = [
-    .package(url: "https://github.com/apple/swift-numerics.git", from: "0.0.4")
+    .package(url: "https://github.com/apple/swift-numerics.git", from: "0.1.0")
 ]
