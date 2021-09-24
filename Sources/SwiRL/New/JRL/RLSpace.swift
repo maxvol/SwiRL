@@ -20,3 +20,48 @@ public extension RLSpace {
         return 1
     }
 }
+
+public extension RLSpace where T: Strideable, T.Stride: SignedInteger {
+    func random() -> RLType<T> {
+        switch self {
+        case .scalar(let range):
+            return .scalar(range.randomElement()!)
+        case .vector(let array):
+            return .vector(array.map { range in range.randomElement()! })
+        }
+    }
+}
+
+public extension RLSpace where T == Double {
+    func random() -> RLType<T> {
+        switch self {
+        case .scalar(let range):
+            return .scalar(T.random(in: range))
+        case .vector(let array):
+            return .vector(array.map { range in T.random(in: range) })
+        }
+    }
+}
+
+public extension RLSpace where T == Float {
+    func random() -> RLType<T> {
+        switch self {
+        case .scalar(let range):
+            return .scalar(T.random(in: range))
+        case .vector(let array):
+            return .vector(array.map { range in T.random(in: range) })
+        }
+    }
+}
+
+public extension RLSpace where T == Int {
+    func random() -> RLType<T> {
+        switch self {
+        case .scalar(let range):
+            return .scalar(T.random(in: range))
+        case .vector(let array):
+            return .vector(array.map { range in T.random(in: range) })
+        }
+    }
+}
+
