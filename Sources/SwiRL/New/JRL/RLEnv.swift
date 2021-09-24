@@ -9,7 +9,7 @@ import Foundation
 
 //typealias RLActionSpace
 
-public protocol RLEnv {
+public protocol RLEnv: CustomStringConvertible {
     associatedtype Value: RLValue
     //    associatedtype Action: RLAction
     //    associatedtype Observation: RLObservation
@@ -17,8 +17,8 @@ public protocol RLEnv {
     associatedtype StateType: Comparable
     associatedtype ActionType: Comparable
     
-    var stateSpace: RLSpace<StateType> { get }
-    var actionSpace: RLSpace<ActionType> { get }
+    static var stateSpace: RLSpace<StateType> { get }
+    static var actionSpace: RLSpace<ActionType> { get }
     var isTerminated: Bool { get }
     var reward: Value { get }
     var state: RLType<StateType> { get }
@@ -30,4 +30,16 @@ public protocol RLEnv {
     
 
 
+}
+
+public extension RLEnv {
+    var description: String {
+        [
+            "isTerminated: \(isTerminated)",
+            "stateSpace: \(Self.stateSpace)",
+            "actionSpace: \(Self.actionSpace)",
+            "state: \(state)"
+        ]
+        .joined(separator: "\n")
+    }
 }
