@@ -34,7 +34,7 @@ public protocol MARLEnvironment {
     // MARK: async/await
 //    #if swift(>=5.5)
     @available(macOS 12, iOS 15, *)
-    func callAsFunction(agent id: ID, action intended: RLType<ActionType>) async throws -> MARLExperience<StateType, ActionType, Value>
+    mutating func callAsFunction(agent id: ID, action intended: RLType<ActionType>) async throws -> MARLExperience<StateType, ActionType, Value>
 //    #endif
     
     // MARK: Combine
