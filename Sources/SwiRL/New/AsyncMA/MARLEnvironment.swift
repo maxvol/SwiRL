@@ -15,27 +15,18 @@ import Combine
 public protocol MARLEnvironment {
     associatedtype ID: Comparable, Hashable
     associatedtype Value: RLValue
-    //    associatedtype Action: RLAction
-    //    associatedtype Observation: RLObservation
-    //    associatedtype Experience: RLExperience
     associatedtype StateType: Comparable
     associatedtype ActionType: Comparable
     
     static var stateSpace: RLSpace<StateType> { get }
     static var actionSpace: RLSpace<ActionType> { get }
     
-//    var isTerminated: Bool { get }
-//    var reward: Value { get }
-//    var state: RLType<StateType> { get }
-    
-    mutating func reset() // -> RLStep<Observation, Value>
-        
+    mutating func reset()
     mutating func step(to observation: RLType<StateType>, isTerminated: Bool)
     
-//    func step(action intended: Action) -> RLStep<Observation, Value>
-
-    /** goes to exp */
+    // MARK: experience buffer
     mutating func callAsFunction(agent id: ID, action intended: RLType<ActionType>)
+    mutating func experience(agent id: ID) -> MARLExperience<StateType, ActionType, Value>?
     
     // MARK: callback
 //    func callAsFunction(agent id: ID, action intended: RLType<ActionType>) // -> RLStep<Observation, Value>

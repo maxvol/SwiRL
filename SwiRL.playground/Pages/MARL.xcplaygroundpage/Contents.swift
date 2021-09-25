@@ -40,8 +40,17 @@ struct MyEnv: MARLEnvironment {
         
         
         var experienceArray = self.experienceMap[id] ?? []
-        experienceArray.append(experience)
+        experienceArray.insert(experience, at: 0)
         self.experienceMap[id] = experienceArray
+    }
+    
+    mutating func experience(agent id: ID) -> MARLExperience<StateType, ActionType, Value>? {
+        guard var experienceArray = self.experienceMap[id] else {
+            return nil
+        }
+        let experience = experienceArray.popLast()
+        self.experienceMap[id] = experienceArray
+        return experience
     }
     
     var status: CurrentValueSubject<MARLStatus<Double, Int>, Never> = CurrentValueSubject<MARLStatus<Double, Int>, Never>(initialStatus)
@@ -55,5 +64,9 @@ myEnv.status.sink {
 }
 myEnv(agent: 1, action: .scalar(1))
 //dump(myEnv)
+
+if let e = myEnv.experience(agent: 1) {
+    print(e)
+}
 
 //: [Next](@next)
