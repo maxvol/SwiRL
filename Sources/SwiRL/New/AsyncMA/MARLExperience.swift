@@ -7,13 +7,20 @@
 
 import Foundation
 
-public struct MARLExperience<Observation: RLObservation, Action: RLAction, Value: RLValue> {
+public struct MARLExperience<StateType: Comparable, ActionType: Comparable, Value: RLValue> {
     /** Oₜ */
-    public let observation: Observation
+    public let observation: RLType<StateType>
     /** Aₜ */
-    public let action: Action
+    public let action: RLType<ActionType>
     /** Rₜ₊₁ */
     public let reward: Value
     /** Oₜ₊₁ */
-    public let nextObservation: Observation
+    public let nextObservation: RLType<StateType>
+    
+    public init(observation: RLType<StateType>, action: RLType<ActionType>, reward: Value, nextObservation: RLType<StateType>) {
+        self.observation = observation
+        self.action = action
+        self.reward = reward
+        self.nextObservation = nextObservation
+    }
 }

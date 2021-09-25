@@ -13,6 +13,7 @@ import Combine
 //typealias RLActionSpace
 
 public protocol MARLEnvironment {
+    associatedtype ID: Comparable
     associatedtype Value: RLValue
     //    associatedtype Action: RLAction
     //    associatedtype Observation: RLObservation
@@ -30,9 +31,11 @@ public protocol MARLEnvironment {
     mutating func reset() // -> RLStep<Observation, Value>
 //    func step(action intended: Action) -> RLStep<Observation, Value>
 
+    /** goes to exp */
+    mutating func callAsFunction(agent id: ID, action intended: RLType<ActionType>)
     
     // MARK: callback
-    func callAsFunction(action intended: RLType<ActionType>) // -> RLStep<Observation, Value>
+//    func callAsFunction(agent id: ID, action intended: RLType<ActionType>) // -> RLStep<Observation, Value>
 
     // MARK: async/await
     #if swift(>=5.5)
