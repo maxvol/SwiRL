@@ -56,12 +56,27 @@ struct MyEnv: MARLEnvironment {
         self.experienceMap[id] = experienceArray
     }
     
+    // MARK: callback
+    
+    mutating func callAsFunction(agent id: ID, action intended: RLType<ActionType>, callback: ((MARLExperience<StateType, ActionType, Value>) -> Void)) throws {
+        if status.value.isTerminated { throw MARLError.isTerminated }
+            
+//    TODO:
+        
+        self.step(to: .scalar(2), isTerminated: false)
+        
+        let experience = MARLExperience<StateType, ActionType, Value>(observation: .scalar(1), action: .scalar(1), reward: 0.0, nextObservation: .scalar(2))
+        
+        callback(experience)
+    }
+    
     // MARK: async
     
     @available(macOS 12, iOS 15, *)
     func callAsFunction(agent id: ID, action intended: RLType<ActionType>) async throws -> MARLExperience<StateType, ActionType, Value> {
         if status.value.isTerminated { throw MARLError.isTerminated }
             
+//    TODO:
     }
     
     // MARK: Combine
@@ -75,14 +90,19 @@ var myEnv = MyEnv()
 myEnv.status.sink {
     print($0)
 }
-try? myEnv(agent: 1, action: .scalar(1))
+
+try? myEnv(agent: 1, action: .scalar(1)) { e in
+    print(e)
+}
+
+try? myEnv(agent: 2, action: .scalar(1))
 //dump(myEnv)
 
 if let e = myEnv.experience(agent: 1) {
     print(e)
 }
 
-await try? myEnv()
+//await try? myEnv(agent: 2, action: .scalar(1))
 //async let
 
 //: [Next](@next)
