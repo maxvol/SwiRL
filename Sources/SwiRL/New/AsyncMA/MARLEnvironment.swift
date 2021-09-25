@@ -25,16 +25,17 @@ public protocol MARLEnvironment {
     mutating func step(to observation: RLType<StateType>, isTerminated: Bool)
     
     // MARK: experience buffer
-    mutating func callAsFunction(agent id: ID, action intended: RLType<ActionType>)
     mutating func experience(agent id: ID) -> MARLExperience<StateType, ActionType, Value>?
+    mutating func callAsFunction(agent id: ID, action intended: RLType<ActionType>) throws
     
     // MARK: callback
 //    func callAsFunction(agent id: ID, action intended: RLType<ActionType>) // -> RLStep<Observation, Value>
 
     // MARK: async/await
-    #if swift(>=5.5)
-//    func callAsFunction(action intended: RLType<ActionType>) async throws -> RLStep<Observation, Value>
-    #endif
+//    #if swift(>=5.5)
+    @available(macOS 12, iOS 15, *)
+    func callAsFunction(agent id: ID, action intended: RLType<ActionType>) async throws -> MARLExperience<StateType, ActionType, Value>
+//    #endif
     
     // MARK: Combine
     #if canImport(Combine)

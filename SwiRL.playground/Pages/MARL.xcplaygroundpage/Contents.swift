@@ -28,8 +28,20 @@ struct MyEnv: MARLEnvironment {
         let delta = self.startTime.distance(to: Date())
         status.value = MARLStatus<Value, StateType>(step: step, time: delta, observation: observation, isTerminated: isTerminated)
     }
+    
+    // MARK: experience buffer
+    
+    mutating func experience(agent id: ID) -> MARLExperience<StateType, ActionType, Value>? {
+        guard var experienceArray = self.experienceMap[id] else {
+            return nil
+        }
+        let experience = experienceArray.popLast()
+        self.experienceMap[id] = experienceArray
+        return experience
+    }
         
-    mutating func callAsFunction(agent id: ID, action intended: RLType<Int>) {
+    mutating func callAsFunction(agent id: ID, action intended: RLType<Int>) throws {
+        if status.value.isTerminated { throw MARLError.isTerminated }
         // TODO
         
         
@@ -44,14 +56,15 @@ struct MyEnv: MARLEnvironment {
         self.experienceMap[id] = experienceArray
     }
     
-    mutating func experience(agent id: ID) -> MARLExperience<StateType, ActionType, Value>? {
-        guard var experienceArray = self.experienceMap[id] else {
-            return nil
-        }
-        let experience = experienceArray.popLast()
-        self.experienceMap[id] = experienceArray
-        return experience
+    // MARK: async
+    
+    @available(macOS 12, iOS 15, *)
+    func callAsFunction(agent id: ID, action intended: RLType<ActionType>) async throws -> MARLExperience<StateType, ActionType, Value> {
+        if status.value.isTerminated { throw MARLError.isTerminated }
+            
     }
+    
+    // MARK: Combine
     
     var status: CurrentValueSubject<MARLStatus<Double, Int>, Never> = CurrentValueSubject<MARLStatus<Double, Int>, Never>(initialStatus)
 
@@ -62,11 +75,14 @@ var myEnv = MyEnv()
 myEnv.status.sink {
     print($0)
 }
-myEnv(agent: 1, action: .scalar(1))
+try? myEnv(agent: 1, action: .scalar(1))
 //dump(myEnv)
 
 if let e = myEnv.experience(agent: 1) {
     print(e)
 }
+
+await try? myEnv()
+//async let
 
 //: [Next](@next)
