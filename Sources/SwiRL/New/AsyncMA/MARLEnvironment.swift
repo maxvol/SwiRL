@@ -13,7 +13,7 @@ import Combine
 //typealias RLActionSpace
 
 public protocol MARLEnvironment {
-    associatedtype ID: Comparable
+    associatedtype ID: Comparable, Hashable
     associatedtype Value: RLValue
     //    associatedtype Action: RLAction
     //    associatedtype Observation: RLObservation
@@ -29,6 +29,9 @@ public protocol MARLEnvironment {
 //    var state: RLType<StateType> { get }
     
     mutating func reset() // -> RLStep<Observation, Value>
+        
+    mutating func step(to observation: RLType<StateType>, isTerminated: Bool)
+    
 //    func step(action intended: Action) -> RLStep<Observation, Value>
 
     /** goes to exp */
@@ -47,6 +50,9 @@ public protocol MARLEnvironment {
     var status: CurrentValueSubject<MARLStatus<Value, StateType>, Never> { get }
     #endif
 
+}
+
+public extension MARLEnvironment {
 }
 
 // range ~= value
