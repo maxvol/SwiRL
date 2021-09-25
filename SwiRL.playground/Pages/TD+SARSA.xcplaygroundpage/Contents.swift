@@ -1,5 +1,6 @@
 //: [Previous](@previous)
 
+/*
 import SwiRL
 
 let env = RLEnvironment()
@@ -14,7 +15,7 @@ for _ in 1...100 {
 }
 
 oneStepTD.stateValue
-
+*/
 /*
  More formally, we should first define Markov Decision Process (MDP) as a tuple (S, A, P, R, y), where:
 

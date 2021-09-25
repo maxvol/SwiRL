@@ -1,5 +1,5 @@
 //
-//  RLDomain.swift
+//  MARLDomain.swift
 //  
 //
 //  Created by Maxim Volgin on 25/09/2021.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-public protocol RLDomain {
+public protocol MARLDomain {
     associatedtype StateType: Comparable
     associatedtype ActionType: Comparable
 
@@ -20,9 +20,9 @@ public protocol RLDomain {
     // which actions
     
     // maybe include status / terminated
-    func canAct(observation: RLType<T>, agent id: ID) -> Bool
+    func canAct(observation: RLType<StateType>, agent id: ID) -> Bool
     
-    func
+//    func generate masks
     
 }
 

@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  MARLEnvironment.swift
 //  
 //
 //  Created by Maxim Volgin on 25/09/2021.
@@ -12,7 +12,7 @@ import Combine
 
 //typealias RLActionSpace
 
-public protocol RLAsyncEnvironment {
+public protocol MARLEnvironment {
     associatedtype Value: RLValue
     //    associatedtype Action: RLAction
     //    associatedtype Observation: RLObservation
@@ -36,12 +36,12 @@ public protocol RLAsyncEnvironment {
 
     // MARK: async/await
     #if swift(>=5.5)
-    func callAsFunction(action intended: RLType<ActionType>) async throws -> RLStep<Observation, Value>
+//    func callAsFunction(action intended: RLType<ActionType>) async throws -> RLStep<Observation, Value>
     #endif
     
     // MARK: Combine
     #if canImport(Combine)
-    var current: CurrentValueSubject<RLStatus<StateType>, Never> { get }
+    var status: CurrentValueSubject<MARLStatus<Value, StateType>, Never> { get }
     #endif
 
 }
