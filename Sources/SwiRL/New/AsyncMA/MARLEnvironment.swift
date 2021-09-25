@@ -29,7 +29,7 @@ public protocol MARLEnvironment {
     mutating func callAsFunction(agent id: ID, action intended: RLType<ActionType>) throws
     
     // MARK: callback
-//    func callAsFunction(agent id: ID, action intended: RLType<ActionType>) // -> RLStep<Observation, Value>
+    mutating func callAsFunction(agent id: ID, action intended: RLType<ActionType>, callback: ((MARLExperience<StateType, ActionType, Value>) -> Void)) throws
 
     // MARK: async/await
 //    #if swift(>=5.5)

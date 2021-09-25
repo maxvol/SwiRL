@@ -77,6 +77,12 @@ struct MyEnv: MARLEnvironment {
         if status.value.isTerminated { throw MARLError.isTerminated }
             
 //    TODO:
+        
+        self.step(to: .scalar(2), isTerminated: false)
+        
+        let experience = MARLExperience<StateType, ActionType, Value>(observation: .scalar(1), action: .scalar(1), reward: 0.0, nextObservation: .scalar(2))
+
+        return experience
     }
     
     // MARK: Combine
