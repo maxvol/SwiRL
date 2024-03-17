@@ -108,7 +108,12 @@ if let e = myEnv.experience(agent: 1) {
     print(e)
 }
 
-//await try? myEnv(agent: 2, action: .scalar(1))
+myEnv.status.sink {
+    print($0)
+}
+
+
+//try? await myEnv(agent: 2, action: .scalar(1))
 //async let
 
 //: [Next](@next)
