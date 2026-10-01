@@ -62,7 +62,7 @@ infix operator .%
 
 public extension Matrix where T: Numeric {
   
-    public static func .*(lhs: Matrix<T>, rhs: Matrix<T>) -> Matrix<T> {
+    static func .*(lhs: Matrix<T>, rhs: Matrix<T>) -> Matrix<T> {
         assert(lhs.shape == rhs.shape)
         var matrix = Matrix<T>(0, shape: lhs.shape)
         matrix.grid = zip(lhs.grid, rhs.grid).map { $0.0 * $0.1}
@@ -73,7 +73,7 @@ public extension Matrix where T: Numeric {
 
 public extension Matrix where T: FloatingPoint {
 
-     public static func ./(lhs: Matrix<T>, rhs: Matrix<T>) -> Matrix<T> {
+    static func ./(lhs: Matrix<T>, rhs: Matrix<T>) -> Matrix<T> {
         assert(lhs.shape == rhs.shape)
         var matrix = Matrix<T>(0, shape: lhs.shape)
         matrix.grid = zip(lhs.grid, rhs.grid).map { $0.0 / $0.1 }
@@ -83,7 +83,7 @@ public extension Matrix where T: FloatingPoint {
 
 public extension Matrix where T: BinaryInteger {
 
-     public static func .%(lhs: Matrix<T>, rhs: Matrix<T>) -> Matrix<T> {
+    static func .%(lhs: Matrix<T>, rhs: Matrix<T>) -> Matrix<T> {
         assert(lhs.shape == rhs.shape)
         var matrix = Matrix<T>(0, shape: lhs.shape)
         matrix.grid = zip(lhs.grid, rhs.grid).map { $0.0 % $0.1}
@@ -93,7 +93,7 @@ public extension Matrix where T: BinaryInteger {
 
 public extension Matrix where T: Numeric {
   
-    public var print: String {
+    var print: String {
       var string = "shape: \(self.shape)\n"
       /** 2D-only */
       switch self.shape.count {
